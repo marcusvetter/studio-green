@@ -3,6 +3,7 @@
 backend:
   name: github
   repo: marcusvetter/studio-green
+  branch: main
 
 media_folder: /public/media
 public_folder: /media

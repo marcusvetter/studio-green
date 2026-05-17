@@ -19,8 +19,8 @@ test.describe("Smoke tests", () => {
     await page.goto("/");
 
     const navLinks = [
-      { href: "/#leistungen", text: "Unsere Leistungen" },
-      { href: "/#team", text: "Das Team" },
+      { href: "/#portfolio", text: "Portfolio" },
+      { href: "/#referenzen", text: "Referenzen" },
       { href: "/#kontakt", text: "Kontakt" },
     ];
 

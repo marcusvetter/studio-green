@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 const pages = [
-  { path: "/", headline: "Herzlich Willkommen bei Studio Green!" },
+  { path: "/", headline: "Über mich" },
   { path: "/impressum", headline: "Impressum" },
 ];
 
@@ -19,9 +19,10 @@ test.describe("Smoke tests", () => {
     await page.goto("/");
 
     const navLinks = [
-      { href: "/#portfolio", text: "Portfolio" },
-      { href: "/#referenzen", text: "Referenzen" },
-      { href: "/#kontakt", text: "Kontakt" },
+      { href: "/#about-me", text: "Über mich" },
+      { href: "/#about-studio", text: "Studio Green" },
+      { href: "/#philosophy", text: "Haltung" },
+      { href: "/#services", text: "Leistungen" },
     ];
 
     for (const link of navLinks) {

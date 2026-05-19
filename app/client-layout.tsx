@@ -12,15 +12,18 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [overlayOpacity, setOverlayOpacity] = useState(0.9)
-  const [revealScale, setRevealScale] = useState(1)
   const [vpW, setVpW] = useState(1920)
   const [vpH, setVpH] = useState(1080)
   const isSolid = pathname !== '/' || scrolled
   const maskId = useId()
+  const svgRef = useRef<SVGSVGElement>(null)
+  const groupRef = useRef<SVGGElement>(null)
   const initVh = useRef(0)
 
   useEffect(() => {
+    const svg = svgRef.current
+    const group = groupRef.current
+    if (!svg || !group) return
     initVh.current = window.innerHeight
     let ticking = false
     const handleScroll = () => {
@@ -30,8 +33,9 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
           const vh = initVh.current
           setScrolled(sy > vh - 100)
           const progress = Math.min(1, sy / (vh * 1.2))
-          setOverlayOpacity(0.9 - progress * 0.9)
-          setRevealScale(1 + progress * 50)
+          svg.style.opacity = String(0.9 - progress * 0.9)
+          const s = 1 + progress * 50
+          group.setAttribute('transform', `translate(${960 * (1 - s)}, ${540 * (1 - s)}) scale(${s})`)
           ticking = false
         })
         ticking = true
@@ -40,16 +44,6 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    const handleResize = () => {
-      setVpW(window.innerWidth)
-      setVpH(window.innerHeight)
-    }
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   useEffect(() => {
@@ -97,9 +91,10 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
             />
 
             <svg
+              ref={svgRef}
               className="absolute inset-0 w-full h-full"
-              style={{ opacity: overlayOpacity }}
-              viewBox={`${960 - (1920 / revealScale) / 2} ${540 - (1080 / revealScale) / 2} ${1920 / revealScale} ${1080 / revealScale}`}
+              style={{ opacity: 0.9 }}
+              viewBox="0 0 1920 1080"
               preserveAspectRatio="xMidYMid slice"
             >
               <defs>
@@ -112,7 +107,9 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
                   </text>
                 </mask>
               </defs>
-              <rect width="1920" height="1080" fill="#384828" mask={`url(#${maskId})`} />
+              <g ref={groupRef}>
+                <rect width="1920" height="1080" fill="#384828" mask={`url(#${maskId})`} />
+              </g>
             </svg>
           </header>
         )}

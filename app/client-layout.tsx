@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState, useId, type ReactNode } from 'react'
+import React, { useEffect, useState, useId, useRef, type ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from "next/image";
@@ -12,25 +12,44 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [overlayOpacity, setOverlayOpacity] = useState(1)
+  const [overlayOpacity, setOverlayOpacity] = useState(0.9)
   const [revealScale, setRevealScale] = useState(1)
   const [vpW, setVpW] = useState(1920)
   const [vpH, setVpH] = useState(1080)
   const isSolid = pathname !== '/' || scrolled
   const maskId = useId()
+  const initVh = useRef(0)
 
   useEffect(() => {
+    initVh.current = window.innerHeight
+    let ticking = false
     const handleScroll = () => {
-      const sy = window.scrollY
-      const vh = window.innerHeight
-      setScrolled(sy > vh - 100)
-      const progress = Math.min(1, sy / (vh * 0.7))
-      setOverlayOpacity(1 - progress)
-      setRevealScale(1 + progress * 50)
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const sy = window.scrollY
+          const vh = initVh.current
+          setScrolled(sy > vh - 100)
+          const progress = Math.min(1, sy / (vh * 1.2))
+          setOverlayOpacity(0.9 - progress * 0.9)
+          setRevealScale(1 + progress * 50)
+          ticking = false
+        })
+        ticking = true
+      }
     }
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const handleResize = () => {
+      setVpW(window.innerWidth)
+      setVpH(window.innerHeight)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   useEffect(() => {

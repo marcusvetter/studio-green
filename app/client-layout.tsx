@@ -92,7 +92,7 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
 
             <svg
               ref={svgRef}
-              className="absolute inset-0 w-full h-full"
+              className="absolute inset-0 w-full h-full hidden lg:block"
               style={{ opacity: 0.9 }}
               viewBox="0 0 1920 1080"
               preserveAspectRatio="xMidYMid slice"

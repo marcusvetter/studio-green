@@ -7,10 +7,13 @@ import Image from "next/image";
 import type { NavItem } from "./layout"
 import "./globals.css";
 
+const NAV_HEIGHT = 128 // px, height of the non-solid navigation bar (HeroNav)
+
 export default function ClientLayout({ children, navItems }: { children: ReactNode; navItems: NavItem[] }) {
 
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
+  const [animationDone, setAnimationDone] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [vpW, setVpW] = useState(1920)
   const [vpH, setVpH] = useState(1080)
@@ -18,6 +21,7 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
   const maskId = useId()
   const svgRef = useRef<SVGSVGElement>(null)
   const groupRef = useRef<SVGGElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
   const initVh = useRef(0)
 
   useEffect(() => {
@@ -31,11 +35,26 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
         requestAnimationFrame(() => {
           const sy = window.scrollY
           const vh = initVh.current
-          setScrolled(sy > vh - 100)
-          const progress = Math.min(1, sy / (vh * 1.2))
-          svg.style.opacity = String(0.9 - progress * 0.9)
-          const s = 1 + progress * 50
-          group.setAttribute('transform', `translate(${960 * (1 - s)}, ${540 * (1 - s)}) scale(${s})`)
+
+          if (window.innerWidth >= 1024) {
+            const progress = Math.min(1, sy / (vh * 0.35))
+            setAnimationDone(sy >= vh * 0.35 - 1)
+            setScrolled(sy >= vh * 1.35 - NAV_HEIGHT)
+            svg.style.opacity = String(Math.max(0, 0.9 - progress * 3))
+            const s = 1 + progress * 50
+            group.setAttribute('transform', `translate(${960 * (1 - s)}, ${540 * (1 - s)}) scale(${s})`)
+
+            if (headerRef.current) {
+              if (sy >= vh * 0.35) {
+                headerRef.current.style.transform = `translateY(-${sy - vh * 0.35}px)`
+              } else {
+                headerRef.current.style.transform = ''
+              }
+            }
+          } else {
+            setScrolled(sy > vh - NAV_HEIGHT)
+          }
+
           ticking = false
         })
         ticking = true
@@ -63,6 +82,15 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
     setMobileMenuOpen(false)
   }, [pathname])
 
+  // Second hero section: image fully revealed with transparent navigation.
+  // Desktop: starts after the reveal animation (scrollY = vh * 0.7).
+  // Mobile: starts at the top (no reveal animation).
+  const scrollToSecondHero = () => {
+    const vh = initVh.current || window.innerHeight
+    const target = window.innerWidth >= 1024 ? vh * 0.35 : 0
+    window.scrollTo({ top: target, behavior: 'smooth' })
+  }
+
   const svgAspect = 1920 / 1080
   const vpAspect = vpW / vpH
   const visibleWidth = vpAspect >= svgAspect ? 1920 : vpW * 1080 / vpH
@@ -77,14 +105,26 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
       </head>
       <body className="min-h-screen">
 
-        {isSolid ? (
-          <SolidNav navItems={navItems} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
-        ) : (
-          <HeroNav navItems={navItems} />
-        )}
+        {/* Mobile nav: always visible, starts directly at second hero section */}
+        <div className="lg:hidden">
+          {isSolid ? (
+            <SolidNav navItems={navItems} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} onLogoClick={scrollToSecondHero} />
+          ) : (
+            <HeroNav navItems={navItems} onLogoClick={scrollToSecondHero} />
+          )}
+        </div>
+        {/* Desktop nav: hidden during first hero section (reveal animation), visible from second hero section */}
+        <div className="hidden lg:block">
+          {(pathname !== '/' || animationDone) && (isSolid ? (
+            <SolidNav navItems={navItems} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} onLogoClick={scrollToSecondHero} />
+          ) : (
+            <HeroNav navItems={navItems} onLogoClick={scrollToSecondHero} />
+          ))}
+        </div>
 
         {pathname === '/' && (
-          <header className="relative w-full h-screen overflow-hidden">
+          <>
+          <header ref={headerRef} className="relative w-full h-screen overflow-hidden lg:fixed lg:inset-0 lg:z-0">
             <div
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: 'url(/header-background.jpeg)' }}
@@ -112,6 +152,8 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
               </g>
             </svg>
           </header>
+          <div className="hidden lg:block" style={{ height: '135vh' }} />
+          </>
         )}
 
         <div className="bg-white">
@@ -134,14 +176,15 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
   );
 }
 
-function SolidNav({ navItems, mobileMenuOpen, setMobileMenuOpen }: {
+function SolidNav({ navItems, mobileMenuOpen, setMobileMenuOpen, onLogoClick }: {
   navItems: NavItem[]
   mobileMenuOpen: boolean
   setMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
+  onLogoClick: () => void
 }) {
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-10 bg-white h-15 border-b-2 border-studio-tertiary transition-all duration-300">
+      <div className="fixed top-0 left-0 right-0 z-20 bg-white h-15 border-b-2 border-studio-tertiary transition-all duration-300">
         <div className="px-4 lg:px-8 h-full">
           <div className="h-full">
             <nav className="flex flex-row items-center justify-between gap-2 h-full">
@@ -149,7 +192,7 @@ function SolidNav({ navItems, mobileMenuOpen, setMobileMenuOpen }: {
                 href={'/'}
                 scroll={false}
                 className="shrink-0 h-12"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                onClick={onLogoClick}
               >
                 <Image
                   src="/studio-green-logo-long.png"
@@ -186,7 +229,7 @@ function SolidNav({ navItems, mobileMenuOpen, setMobileMenuOpen }: {
         </div>
       </div>
 
-      <div className={`fixed top-15 left-0 right-0 z-10 bg-studio-primary lg:hidden transition-all duration-300 ease-in-out ${
+      <div className={`fixed top-15 left-0 right-0 z-20 bg-studio-primary lg:hidden transition-all duration-300 ease-in-out ${
         mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1 pointer-events-none'
       }`}>
         <div className="flex flex-col items-end px-4 lg:px-8 py-4 gap-2">
@@ -206,9 +249,12 @@ function SolidNav({ navItems, mobileMenuOpen, setMobileMenuOpen }: {
   )
 }
 
-function HeroNav({ navItems }: { navItems: NavItem[] }) {
+function HeroNav({ navItems, onLogoClick }: {
+  navItems: NavItem[]
+  onLogoClick: () => void
+}) {
   return (
-    <div className="fixed top-0 left-0 right-0 z-10 transition-all duration-300">
+    <div className="fixed top-0 left-0 right-0 z-20 transition-all duration-300">
       <div className="px-4 lg:px-8 h-full">
         <div className="h-full">
           <nav className="flex flex-row items-start justify-between gap-2 h-full pt-2 lg:pt-3 pb-2 flex-wrap lg:flex-nowrap">
@@ -216,7 +262,7 @@ function HeroNav({ navItems }: { navItems: NavItem[] }) {
               href={'/'}
               scroll={false}
               className="shrink-0 w-36 lg:w-44"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={onLogoClick}
             >
               <Image
                 src="/studio-green-logo-long-white.png"

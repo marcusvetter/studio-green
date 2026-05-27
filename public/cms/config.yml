@@ -4,6 +4,7 @@ backend:
   name: github
   repo: marcusvetter/studio-green
   branch: main
+  base_url: https://studio-green-cms-auth.marcus-vetter.workers.dev
 
 media_folder: /public/media
 public_folder: /media

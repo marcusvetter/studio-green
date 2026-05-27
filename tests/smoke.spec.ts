@@ -18,6 +18,12 @@ test.describe("Smoke tests", () => {
   test("anchor navigation links exist on home", async ({ page }) => {
     await page.goto("/");
 
+    // Wait for React hydration to complete, then scroll past the hero mask
+    // reveal animation threshold to make the desktop navigation visible.
+    await page.waitForTimeout(1500);
+    await page.evaluate(() => window.scrollTo({ top: window.innerHeight * 0.5, behavior: 'instant' }));
+    await page.waitForTimeout(300);
+
     const navLinks = [
       { href: "/#about-me", text: "Über mich" },
       { href: "/#about-studio", text: "Studio Green" },
@@ -26,7 +32,9 @@ test.describe("Smoke tests", () => {
     ];
 
     for (const link of navLinks) {
-      const navLink = page.locator(`nav a[href="${link.href}"]`);
+      // On desktop two <nav> elements are rendered: a hidden mobile one (lg:hidden,
+      // zero bounding box) and a visible desktop one. Use .last() to target the visible one.
+      const navLink = page.locator(`nav a[href="${link.href}"]`).last();
       await expect(navLink).toBeVisible();
     }
   });

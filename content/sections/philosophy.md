@@ -1,5 +1,5 @@
 ---
-title: Haltung
+title: Haltung Testtest
 nav_title: Haltung
 section: philosophy
 order: 3

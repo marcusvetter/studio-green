@@ -9,7 +9,7 @@ image_position: right
 
 - **GARTENSTILFESTLEGUNG** anhand von Gesprächen und einem Fragebogen
 - **MOODBOARDS** zur bildlichen Darstellung Ihrer Gartenwünsche mit ersten Materialideen
-- KONZEPTIONSPLANUNG für die Definition von Funktionsbereichen auf Ihrem Grundstück
+- **KONZEPTIONSPLANUNG** für die Definition von Funktionsbereichen auf Ihrem Grundstück
 - ENTWURFSPLANUNG Ihres Gartens auf Basis der Konzeption (digitale 2D Zeichnung)
 - MATERIALKONZEPT individuell auf Ihren Garten zugeschnitten
 - PFLANZPLANUNG passend zu Ihrem Standort und Gartenstil

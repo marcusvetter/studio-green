@@ -9,6 +9,9 @@ backend:
 media_folder: /public/media
 public_folder: /media
 
+editor:
+  preview: false
+
 collections:
   - name: sections
     label: Sections

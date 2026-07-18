@@ -7,7 +7,34 @@ import Image from "next/image";
 import type { NavItem } from "./layout"
 import "./globals.css";
 
-const NAV_HEIGHT = 128 // px, height of the non-solid navigation bar (HeroNav)
+function animateHero(
+  svg: SVGSVGElement,
+  group: SVGGElement,
+  duration: number,
+  onComplete: () => void
+) {
+  const start = performance.now()
+  const cx = 960, cy = 540
+
+  function tick(now: number) {
+    const t = Math.min(1, (now - start) / duration)
+    const e = t < 0.5
+      ? 4 * t * t * t
+      : 1 - Math.pow(-2 * t + 2, 3) / 2
+
+    svg.style.opacity = String(Math.max(0, 0.9 - e * 0.9))
+    const s = 1 + e * 50
+    group.setAttribute('transform',
+      `translate(${cx * (1 - s)}, ${cy * (1 - s)}) scale(${s})`)
+
+    if (t < 1) {
+      requestAnimationFrame(tick)
+    } else {
+      onComplete()
+    }
+  }
+  requestAnimationFrame(tick)
+}
 
 export default function ClientLayout({ children, navItems }: { children: ReactNode; navItems: NavItem[] }) {
 
@@ -23,6 +50,9 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
   const groupRef = useRef<SVGGElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const initVh = useRef(0)
+  const animationDoneRef = useRef(false)
+  const animCompleteScrollY = useRef(0)
+  const animStarted = useRef(false)
 
   useEffect(() => {
     const svg = svgRef.current
@@ -37,22 +67,24 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
           const vh = initVh.current
 
           if (window.innerWidth >= 1024) {
-            const progress = Math.min(1, sy / (vh * 0.35))
-            setAnimationDone(sy >= vh * 0.35 - 1)
-            setScrolled(sy >= vh * 1.35 - NAV_HEIGHT)
-            svg.style.opacity = String(Math.max(0, 0.9 - progress * 3))
-            const s = 1 + progress * 50
-            group.setAttribute('transform', `translate(${960 * (1 - s)}, ${540 * (1 - s)}) scale(${s})`)
+            if (!animStarted.current && sy > 0) {
+              animStarted.current = true
+              animateHero(svg, group, 2000, () => {
+                animationDoneRef.current = true
+                animCompleteScrollY.current = window.scrollY
+                setAnimationDone(true)
+              })
+            }
 
-            if (headerRef.current) {
-              if (sy >= vh * 0.35) {
-                headerRef.current.style.transform = `translateY(-${sy - vh * 0.35}px)`
-              } else {
-                headerRef.current.style.transform = ''
+            if (animationDoneRef.current) {
+              setScrolled(sy >= vh * 1.7)
+              if (headerRef.current) {
+                const offset = Math.max(0, sy - animCompleteScrollY.current)
+                headerRef.current.style.transform = offset > 0 ? `translateY(-${offset}px)` : ''
               }
             }
           } else {
-            setScrolled(sy > vh - NAV_HEIGHT)
+            setScrolled(sy > vh - 100)
           }
 
           ticking = false
@@ -64,6 +96,18 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    if (pathname !== '/') return
+    if (window.innerWidth >= 1024) return
+    const svg = svgRef.current
+    const group = groupRef.current
+    if (!svg || !group) return
+    const timer = setTimeout(() => {
+      animateHero(svg, group, 2000, () => setAnimationDone(true))
+    }, 1000)
+    return () => clearTimeout(timer)
+  }, [pathname])
 
   useEffect(() => {
     const handleResize = () => {
@@ -82,12 +126,9 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
     setMobileMenuOpen(false)
   }, [pathname])
 
-  // Second hero section: image fully revealed with transparent navigation.
-  // Desktop: starts after the reveal animation (scrollY = vh * 0.7).
-  // Mobile: starts at the top (no reveal animation).
   const scrollToSecondHero = () => {
     const vh = initVh.current || window.innerHeight
-    const target = window.innerWidth >= 1024 ? vh * 0.35 : 0
+    const target = window.innerWidth >= 1024 ? vh * 0.7 : 0
     window.scrollTo({ top: target, behavior: 'smooth' })
   }
 
@@ -132,7 +173,7 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
 
             <svg
               ref={svgRef}
-              className="absolute inset-0 w-full h-full hidden lg:block"
+              className="absolute inset-0 w-full h-full"
               style={{ opacity: 0.9 }}
               viewBox="0 0 1920 1080"
               preserveAspectRatio="xMidYMid slice"
@@ -152,7 +193,7 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
               </g>
             </svg>
           </header>
-          <div className="hidden lg:block" style={{ height: '135vh' }} />
+          <div className="hidden lg:block" style={{ height: '170vh' }} />
           </>
         )}
 

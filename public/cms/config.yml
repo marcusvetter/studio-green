@@ -21,13 +21,50 @@ collections:
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Navigation Title, name: nav_title, widget: string, required: false, hint: "Optional shorter title for the navigation bar. Falls back to Title if empty." }
-      - { label: Section Identifier, name: section, widget: string, hint: "Machine-readable identifier used as the HTML id (e.g. about-me, services)" }
+      - { label: Section Identifier, name: section, widget: string, hint: "Machine-readable identifier used as the HTML id (e.g. intro, projects, services)" }
       - { label: Order, name: order, widget: number, value_type: int, min: 0 }
-      - { label: Image, name: image, widget: image, required: false }
+      - { label: Image, name: image, widget: image, required: false, hint: "Used by the about-me section." }
       - label: Image Position
         name: image_position
         widget: select
         options: ["left", "right"]
         default: "left"
-        required: true
-      - { label: Body, name: body, widget: markdown }
+        required: false
+      - { label: Subtitle, name: subtitle, widget: string, required: false, hint: "Used by the about-me section (e.g. 'Biologin & Gartendesignerin · Andernach')." }
+      - { label: Body, name: body, widget: markdown, required: false, hint: "Markdown body for intro and about-me sections." }
+      - label: Quote Text
+        name: quote_text
+        widget: string
+        required: false
+        hint: "Used by the quote section."
+      - { label: Author, name: author, widget: string, required: false, hint: "Used by the quote section (e.g. 'Verena Hoffmann · Studio Green')." }
+      - { label: Headline, name: headline, widget: string, required: false, hint: "Used by the contact section." }
+      - { label: Contact Text, name: text, widget: text, required: false, hint: "Used by the contact section." }
+      - { label: Email, name: email, widget: string, required: false, hint: "Used by the contact section (e.g. 'hallo@studio-green.de')." }
+      - label: Projects
+        name: projects
+        widget: list
+        required: false
+        hint: "Used by the projects section. Each item is a garden project."
+        field: { label: Project, name: project, widget: object, fields: [
+            { label: Number, name: nr, widget: string },
+            { label: Name, name: name, widget: string },
+            { label: Description, name: description, widget: text },
+            { label: Image URL, name: image, widget: string },
+            { label: Tags, name: tags, widget: list, field: { label: Tag, name: tag, widget: string } }
+        ]}
+      - label: Service Cards
+        name: cards
+        widget: list
+        required: false
+        hint: "Used by the services section. Each item is a service category with steps."
+        field: { label: Card, name: card, widget: object, fields: [
+            { label: Number, name: nr, widget: string },
+            { label: Name, name: name, widget: string },
+            { label: Tagline, name: tagline, widget: string },
+            { label: Note, name: note, widget: string, required: false },
+            { label: Steps, name: steps, widget: list, field: { label: Step, name: step, widget: object, fields: [
+                { label: Title, name: title, widget: string },
+                { label: Description, name: description, widget: text }
+            ]}}
+        ]}

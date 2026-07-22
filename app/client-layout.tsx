@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useEffect, useState, useId, useRef, type ReactNode } from 'react'
+import React, { useEffect, useState, useRef, type ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import Image from "next/image";
+import Image from "next/image"
 import type { NavItem } from "./layout"
-import "./globals.css";
+import "./globals.css"
 
 function animateHero(
   svg: SVGSVGElement,
@@ -45,70 +45,33 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
   const [vpW, setVpW] = useState(1920)
   const [vpH, setVpH] = useState(1080)
   const isSolid = pathname !== '/' || scrolled
-  const maskId = useId()
   const svgRef = useRef<SVGSVGElement>(null)
   const groupRef = useRef<SVGGElement>(null)
-  const headerRef = useRef<HTMLDivElement>(null)
-  const initVh = useRef(0)
-  const animationDoneRef = useRef(false)
-  const animCompleteScrollY = useRef(0)
-  const animStarted = useRef(false)
 
+  // Hero animation: plays on mount
   useEffect(() => {
+    if (pathname !== '/') return
     const svg = svgRef.current
     const group = groupRef.current
     if (!svg || !group) return
-    initVh.current = window.innerHeight
-    let ticking = false
+    const delay = 1000
+    const timer = setTimeout(() => {
+      animateHero(svg, group, 2000, () => setAnimationDone(true))
+    }, delay)
+    return () => clearTimeout(timer)
+  }, [pathname])
+
+  // Scroll: track scrolled state
+  useEffect(() => {
     const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const sy = window.scrollY
-          const vh = initVh.current
-
-          if (window.innerWidth >= 1024) {
-            if (!animStarted.current && sy > 0) {
-              animStarted.current = true
-              animateHero(svg, group, 2000, () => {
-                animationDoneRef.current = true
-                animCompleteScrollY.current = window.scrollY
-                setAnimationDone(true)
-              })
-            }
-
-            if (animationDoneRef.current) {
-              setScrolled(sy >= vh * 1.7)
-              if (headerRef.current) {
-                const offset = Math.max(0, sy - animCompleteScrollY.current)
-                headerRef.current.style.transform = offset > 0 ? `translateY(-${offset}px)` : ''
-              }
-            }
-          } else {
-            setScrolled(sy > vh - 100)
-          }
-
-          ticking = false
-        })
-        ticking = true
-      }
+      setScrolled(window.scrollY > 80)
     }
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    if (pathname !== '/') return
-    if (window.innerWidth >= 1024) return
-    const svg = svgRef.current
-    const group = groupRef.current
-    if (!svg || !group) return
-    const timer = setTimeout(() => {
-      animateHero(svg, group, 2000, () => setAnimationDone(true))
-    }, 1000)
-    return () => clearTimeout(timer)
-  }, [pathname])
-
+  // Resize: for SVG sizing
   useEffect(() => {
     const handleResize = () => {
       setVpW(window.innerWidth)
@@ -119,6 +82,20 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  // Custom cursor
+  useEffect(() => {
+    const handleCursorMove = (e: MouseEvent) => {
+      const cursor = document.getElementById('custom-cursor')
+      if (cursor) {
+        cursor.style.left = e.clientX + 'px'
+        cursor.style.top = e.clientY + 'px'
+      }
+    }
+    document.addEventListener('mousemove', handleCursorMove)
+    return () => document.removeEventListener('mousemove', handleCursorMove)
+  }, [])
+
+  // Reset on navigation
   useEffect(() => {
     if (!window.location.hash) {
       window.scrollTo(0, 0)
@@ -126,10 +103,8 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
     setMobileMenuOpen(false)
   }, [pathname])
 
-  const scrollToSecondHero = () => {
-    const vh = initVh.current || window.innerHeight
-    const target = window.innerWidth >= 1024 ? vh * 0.7 : 0
-    window.scrollTo({ top: target, behavior: 'smooth' })
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const svgAspect = 1920 / 1080
@@ -140,32 +115,38 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
   const dy2 = Math.round(fontSize * 1.12)
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="de" className="scroll-smooth">
       <head>
         <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body className="min-h-screen">
 
-        {/* Mobile nav: always visible, starts directly at second hero section */}
-        <div className="lg:hidden">
-          {isSolid ? (
-            <SolidNav navItems={navItems} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} onLogoClick={scrollToSecondHero} />
-          ) : (
-            <HeroNav navItems={navItems} onLogoClick={scrollToSecondHero} />
+        {/* Custom cursor dot */}
+        <div
+          id="custom-cursor"
+          className="fixed w-2.5 h-2.5 rounded-full bg-[#1C2E1A] pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-multiply transition-[opacity] duration-200"
+        />
+
+        {/* Mobile nav: always visible, always solid */}
+        <div className="md:hidden">
+          <Nav navItems={navItems} solid={true} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} onLogoClick={scrollToTop} />
+        </div>
+        {/* Desktop nav: hidden during hero animation on home */}
+        <div className="hidden md:block">
+          {(pathname !== '/' || animationDone) && (
+          <Nav navItems={navItems} solid={isSolid} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} onLogoClick={scrollToTop} />
           )}
         </div>
-        {/* Desktop nav: hidden during first hero section (reveal animation), visible from second hero section */}
-        <div className="hidden lg:block">
-          {(pathname !== '/' || animationDone) && (isSolid ? (
-            <SolidNav navItems={navItems} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} onLogoClick={scrollToSecondHero} />
-          ) : (
-            <HeroNav navItems={navItems} onLogoClick={scrollToSecondHero} />
-          ))}
-        </div>
 
+        {/* Hero: relative, scrolls away naturally */}
         {pathname === '/' && (
-          <>
-          <header ref={headerRef} className="relative w-full h-screen overflow-hidden lg:fixed lg:inset-0 lg:z-0">
+          <header className="relative w-full h-screen overflow-hidden">
             <div
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: 'url(/header-background.jpeg)' }}
@@ -179,7 +160,7 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
               preserveAspectRatio="xMidYMid slice"
             >
               <defs>
-                <mask id={maskId}>
+                <mask id="hero-mask">
                   <rect width="1920" height="1080" fill="white" />
                   <text x="960" y="540" textAnchor="middle" dominantBaseline="central"
                         fontSize={fontSize} fontWeight="bold" fill="black" fontFamily="system-ui, sans-serif">
@@ -189,97 +170,100 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
                 </mask>
               </defs>
               <g ref={groupRef}>
-                <rect width="1920" height="1080" fill="#384828" mask={`url(#${maskId})`} />
+                <rect width="1920" height="1080" fill="#1C2E1A" mask="url(#hero-mask)" />
               </g>
             </svg>
           </header>
-          <div className="hidden lg:block" style={{ height: '170vh' }} />
-          </>
         )}
 
-        <div className="bg-white">
-          <main className={`px-4 lg:px-8 py-4 lg:py-8 ${pathname !== '/' ? 'pt-24 lg:pt-28' : ''}`}>
+        <div className="bg-[#F5F0E8]">
+          <main className={`py-4 lg:py-8 ${pathname !== '/' ? 'pt-24 lg:pt-28' : ''}`}>
             {children}
           </main>
         </div>
 
-        <footer className="px-4 lg:px-8 bg-white">
-          <div className="w-full h-1 bg-linear-to-r from-studio-tertiary/70 via-studio-primary/70 to-studio-secondary/70"></div>
-          <div className="py-4 space-y-4 lg:space-y-0 text-center">
-            <Link href={"/impressum"} className="font-semibold">
+        <footer className="bg-[#1C2E1A] px-6 md:px-12">
+          <div className="w-full h-px bg-[#C9B99A]/20"></div>
+          <div className="py-6 flex justify-end">
+            <Link href={"/impressum"} className="text-[10px] tracking-[0.16em] uppercase text-[#7A9E76] no-underline hover:text-[#C9B99A] transition-colors">
               Impressum & Datenschutz
             </Link>
           </div>
         </footer>
 
-      </body >
-    </html >
-  );
+      </body>
+    </html>
+  )
 }
 
-function SolidNav({ navItems, mobileMenuOpen, setMobileMenuOpen, onLogoClick }: {
+function Nav({ navItems, solid, mobileMenuOpen, setMobileMenuOpen, onLogoClick }: {
   navItems: NavItem[]
+  solid: boolean
   mobileMenuOpen: boolean
   setMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
   onLogoClick: () => void
 }) {
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-20 bg-white h-15 border-b-2 border-studio-tertiary transition-all duration-300">
-        <div className="px-4 lg:px-8 h-full">
-          <div className="h-full">
-            <nav className="flex flex-row items-center justify-between gap-2 h-full">
+      <nav
+        className={`fixed top-0 left-0 right-0 z-20 flex justify-between items-center transition-all duration-400 ${
+          solid
+            ? 'bg-[#F5F0E8]/95 backdrop-blur-[8px] border-b border-[#C9B99A]/50 px-6 md:px-12 py-4'
+            : 'bg-transparent px-6 md:px-12 py-4'
+        }`}
+      >
+        <Link href="/" scroll={false} className="flex items-center no-underline shrink-0" onClick={onLogoClick}>
+          <Image
+            src="/studio-green-logo-long.png"
+            alt="Studio Green"
+            width={400}
+            height={60}
+            className="h-14 w-auto"
+            priority
+          />
+        </Link>
+
+        {/* Desktop links */}
+        <div className="hidden md:flex gap-10 list-none">
+          {navItems.map(item => (
+            <li key={item.href}>
               <Link
-                href={'/'}
-                scroll={false}
-                className="shrink-0 h-12"
-                onClick={onLogoClick}
+                href={item.href}
+                className={`text-[11px] font-normal tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${
+                  solid ? 'text-[#2A1F14] hover:text-[#C9B99A]' : 'text-[#F5F0E8] hover:text-[#C9B99A]'
+                }`}
               >
-                <Image
-                  src="/studio-green-logo-long.png"
-                  alt="Studio Green"
-                  width={200}
-                  height={28}
-                  className="h-full w-auto"
-                  priority
-                />
+                {item.label}
               </Link>
-
-              <button
-                onClick={() => setMobileMenuOpen(p => !p)}
-                className="lg:hidden flex flex-col gap-1.5 p-2"
-              >
-                <span className={`block h-0.5 w-6 bg-studio-secondary transition-transform ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-                <span className={`block h-0.5 w-6 bg-studio-secondary transition-opacity ${mobileMenuOpen ? 'opacity-0' : ''}`} />
-                <span className={`block h-0.5 w-6 bg-studio-secondary transition-transform ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
-              </button>
-
-              <div className="hidden lg:flex gap-1 lg:gap-2 flex-row items-center">
-                {navItems.map(item => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="link border-b border-transparent hover:border-studio-accent transition-all duration-200 px-2 py-1 text-md text-studio-secondary"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </nav>
-          </div>
+            </li>
+          ))}
         </div>
-      </div>
 
-      <div className={`fixed top-15 left-0 right-0 z-20 bg-studio-primary lg:hidden transition-all duration-300 ease-in-out ${
-        mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1 pointer-events-none'
+        {/* Mobile hamburger — only when solid */}
+        {solid && (
+          <button
+            onClick={() => setMobileMenuOpen(p => !p)}
+            className="md:hidden flex flex-col gap-1.5 p-2 bg-transparent border-none cursor-pointer"
+            aria-label="Menü"
+          >
+            <span className={`block h-px w-6 bg-[#2A1F14] transition-transform duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+            <span className={`block h-px w-6 bg-[#2A1F14] transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`} />
+            <span className={`block h-px w-6 bg-[#2A1F14] transition-transform duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+          </button>
+        )}
+      </nav>
+
+      {/* Mobile menu slide-down */}
+      <div className={`fixed top-0 left-0 right-0 z-10 bg-[#1C2E1A] transition-all duration-300 ease-in-out md:hidden ${
+        mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
       }`}>
-        <div className="flex flex-col items-end px-4 lg:px-8 py-4 gap-2">
+        <div className="flex flex-col items-end px-6 py-24 gap-2">
           {navItems.map(item => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="link border-b border-transparent hover:border-studio-accent text-white text-base text-right py-2"
+              className="text-[#F5F0E8] text-base no-underline py-2 tracking-wide hover:text-[#C9B99A] transition-colors"
             >
               {item.label}
             </Link>
@@ -287,48 +271,5 @@ function SolidNav({ navItems, mobileMenuOpen, setMobileMenuOpen, onLogoClick }: 
         </div>
       </div>
     </>
-  )
-}
-
-function HeroNav({ navItems, onLogoClick }: {
-  navItems: NavItem[]
-  onLogoClick: () => void
-}) {
-  return (
-    <div className="fixed top-0 left-0 right-0 z-20 transition-all duration-300">
-      <div className="px-4 lg:px-8 h-full">
-        <div className="h-full">
-          <nav className="flex flex-row items-start justify-between gap-2 h-full pt-2 lg:pt-3 pb-2 flex-wrap lg:flex-nowrap">
-            <Link
-              href={'/'}
-              scroll={false}
-              className="shrink-0 w-36 lg:w-44"
-              onClick={onLogoClick}
-            >
-              <Image
-                src="/studio-green-logo-long-white.png"
-                alt="Studio Green"
-                width={400}
-                height={236}
-                className="w-full h-auto"
-                priority
-              />
-            </Link>
-
-            <div className="flex gap-1 lg:gap-2 flex-col items-end">
-              {navItems.map(item => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="link border-b border-transparent hover:border-studio-accent transition-all duration-200 mx-4 lg:mx-6 py-2 text-base text-right sm:text-center lg:text-lg text-white"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </nav>
-        </div>
-      </div>
-    </div>
   )
 }

@@ -2,11 +2,13 @@
 title: Über mich
 nav_title: Über mich
 section: about-me
-order: 1
+order: 5
 image: /media/about-me Medium.jpeg
-image_position: right
+subtitle: "Biologin & Gartengestalterin · Andernach"
 ---
 
-Mein Name ist Verena Hoffmann, ich bin Biologin und der kreative Kopf hinter Studio Green.
-Es begeistert mich, Gärten zu gestalten, die Menschen berühren – Orte, die Ruhe schenken, inspirieren und mit allen Sinnen erlebbar sind.
-Bei meiner Arbeit verbinde ich Pflanzenwissen, ästhetisches Design und einen Blick für individuelle Wünsche.
+Ich bin aufgewachsen zwischen einem alten Obstgarten und einer Steinmauer, die niemand mehr kennt. Vielleicht erklärt das, warum meine Arbeit immer mit dem Zuhören beginnt — mit dem Ort, bevor er Garten wird.
+
+Ich arbeite ausschließlich mit Materialien, die Zeit nicht verstecken, sondern zeigen. Kebony und Muschelkalk verändern sich mit den Jahrzehnten. Das ist keine Schwäche — das ist ihre Geschichte.
+
+Meine Gärten entstehen langsam. Sie sind nicht für den ersten Sommer gemacht.

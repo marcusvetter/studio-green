@@ -17,5 +17,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     label: s.navTitle || s.title,
   }))
 
-  return <ClientLayout navItems={navItems}>{children}</ClientLayout>
+  return (
+    <ClientLayout navItems={navItems}>{children}</ClientLayout>
+  )
 }

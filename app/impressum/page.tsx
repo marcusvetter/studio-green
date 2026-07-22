@@ -1,5 +1,5 @@
 export default function Page() {
-    return <div>
+    return <div className="px-6 md:px-12">
         <h1>Impressum</h1>
 
         <h2>Angaben gemäß § 5 DDG</h2>

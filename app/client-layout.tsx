@@ -137,12 +137,12 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
         <div className="md:hidden">
           <Nav navItems={navItems} solid={true} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} onLogoClick={scrollToTop} />
         </div>
-        {/* Desktop nav: hidden during hero animation on home */}
-        <div className="hidden md:block">
-          {(pathname !== '/' || animationDone) && (
-          <Nav navItems={navItems} solid={isSolid} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} onLogoClick={scrollToTop} />
-          )}
-        </div>
+        {/* Desktop nav: fades in after hero animation on home */}
+        {(pathname !== '/' || animationDone) && (
+          <div className="hidden md:block" style={{ animation: 'fadeIn 0.7s ease-in-out' }}>
+            <Nav navItems={navItems} solid={isSolid} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} onLogoClick={scrollToTop} />
+          </div>
+        )}
 
         {/* Hero: relative, scrolls away naturally */}
         {pathname === '/' && (
@@ -214,7 +214,7 @@ function Nav({ navItems, solid, mobileMenuOpen, setMobileMenuOpen, onLogoClick }
       >
         <Link href="/" scroll={false} className="flex items-center no-underline shrink-0" onClick={onLogoClick}>
           <Image
-            src="/studio-green-logo-long.png"
+            src={solid ? "/studio-green-logo-long.png" : "/studio-green-logo-long-white.png"}
             alt="Studio Green"
             width={400}
             height={60}
@@ -229,7 +229,7 @@ function Nav({ navItems, solid, mobileMenuOpen, setMobileMenuOpen, onLogoClick }
             <li key={item.href}>
               <Link
                 href={item.href}
-                className={`text-[11px] font-normal tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${
+                className={`block py-4 text-[11px] font-normal tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${
                   solid ? 'text-[#2A1F14] hover:text-[#C9B99A]' : 'text-[#F5F0E8] hover:text-[#C9B99A]'
                 }`}
               >

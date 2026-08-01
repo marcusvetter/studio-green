@@ -3,6 +3,7 @@ title: Leistungen
 nav_title: Leistungen
 section: services
 order: 3
+fullbleed_image: /media/garten-morgenlicht.jpeg
 cards:
   - nr: "01"
     name: Gesamtprojekt

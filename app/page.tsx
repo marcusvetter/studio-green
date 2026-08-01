@@ -230,22 +230,28 @@ function ContactSection() {
 }
 
 export default function Home() {
+  const intro = loadIntro()
+  const services = loadServices()
   return (
     <div>
       <IntroSection />
-      <FullbleedImage
-        src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1800&q=85&auto=format&fit=crop&crop=center"
-        alt="Wildgräser im Morgenlicht"
-        caption="Gräser, die dem Wind folgen."
-        className="h-[70vh] min-h-[420px]"
-      />
+      {intro?.fullbleedImage && (
+        <FullbleedImage
+          src={intro.fullbleedImage}
+          alt="Wildgräser im Morgenlicht"
+          caption={intro.fullbleedCaption}
+          className="h-[70vh] min-h-[420px]"
+        />
+      )}
       <ProjectsSection />
       <ServicesSection />
-      <FullbleedImage
-        src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=1800&q=85&auto=format&fit=crop"
-        alt="Garten im Morgenlicht"
-        className="h-[55vh] min-h-[360px]"
-      />
+      {services?.fullbleedImage && (
+        <FullbleedImage
+          src={services.fullbleedImage}
+          alt="Garten im Morgenlicht"
+          className="h-[55vh] min-h-[360px]"
+        />
+      )}
       <QuoteSection />
       <AboutSection />
       <ContactSection />

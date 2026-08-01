@@ -41,6 +41,16 @@ collections:
         widget: image
         required: false
         hint: "Used by the about-me section."
+      - label: Full-bleed Image
+        name: fullbleed_image
+        widget: image
+        required: false
+        hint: "Optional full-width image shown after this section (used by the intro and services sections)."
+      - label: Full-bleed Caption
+        name: fullbleed_caption
+        widget: string
+        required: false
+        hint: "Optional caption for the full-bleed image (used by the intro section)."
       - label: Image Position
         name: image_position
         widget: select

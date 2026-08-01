@@ -11,6 +11,8 @@ export type Section = {
 
 export type IntroSection = Section & {
   body: string
+  fullbleedImage?: string
+  fullbleedCaption?: string
 }
 
 export type Project = {
@@ -40,6 +42,7 @@ export type ServiceCard = {
 
 export type ServicesSection = Section & {
   cards: ServiceCard[]
+  fullbleedImage?: string
 }
 
 export type QuoteSection = Section & {
@@ -89,7 +92,12 @@ export function loadSections(): Section[] {
 }
 
 export function loadIntro(): IntroSection | undefined {
-  const items = loadDir("sections", (data, content) => ({ ...parseSection(data), body: content } as IntroSection))
+  const items = loadDir("sections", (data, content) => ({
+    ...parseSection(data),
+    body: content,
+    fullbleedImage: data.fullbleed_image ? String(data.fullbleed_image) : undefined,
+    fullbleedCaption: data.fullbleed_caption ? String(data.fullbleed_caption) : undefined,
+  } as IntroSection))
   return items.find(s => s.section === "intro")
 }
 
@@ -125,7 +133,11 @@ export function loadServices(): ServicesSection | undefined {
         note: c.note ? String(c.note) : undefined,
       }
     })
-    return { ...parseSection(data), cards } as ServicesSection
+    return {
+      ...parseSection(data),
+      cards,
+      fullbleedImage: data.fullbleed_image ? String(data.fullbleed_image) : undefined,
+    } as ServicesSection
   })
   return items.find(s => s.section === "services")
 }

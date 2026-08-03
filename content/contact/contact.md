@@ -1,7 +1,7 @@
 ---
 title: Kontakt
-nav_title: ''
-show_in_nav: false
+nav_title: Kontakt
+show_in_nav: true
 section: contact
 order: 6
 eyebrow: Kontakt

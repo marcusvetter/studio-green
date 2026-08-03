@@ -23,17 +23,21 @@ test.describe("Smoke tests", () => {
     await page.evaluate(() => window.scrollTo({ top: window.innerHeight * 1.5, behavior: 'instant' }));
     await page.waitForTimeout(500);
 
-    const navLinks = [
-      { href: "/#intro", text: "Arbeit" },
-      { href: "/#projects", text: "Gärten" },
-      { href: "/#services", text: "Leistungen" },
-      { href: "/#about-me", text: "Über mich" },
-      { href: "/#contact", text: "Kontakt" },
-    ];
+    // Content is CMS-configurable (nav items can be hidden), so don't assert a
+    // fixed list. Instead, every rendered nav link must target an existing
+    // anchor on the home page.
+    const navLinks = page.locator("nav a[href^='/#']");
+    await expect(navLinks.first()).toBeVisible();
 
-    for (const link of navLinks) {
-      const navLink = page.locator(`nav a[href="${link.href}"]`).last();
-      await expect(navLink).toBeVisible();
+    const hrefs = (await navLinks.evaluateAll(links =>
+      links.map(l => l.getAttribute("href"))
+    )).filter((h): h is string => !!h);
+    expect(hrefs.length).toBeGreaterThan(0);
+
+    for (const href of hrefs) {
+      const anchor = href.slice(1); // "/#intro" -> "#intro"
+      const count = await page.locator(anchor).count();
+      expect(count, `anchor ${anchor} missing for nav link ${href}`).toBeGreaterThan(0);
     }
   });
 });

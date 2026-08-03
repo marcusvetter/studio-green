@@ -3,7 +3,6 @@ title: Kontakt
 nav_title: ''
 show_in_nav: false
 section: contact
-show_in_nav: true
 order: 6
 eyebrow: Kontakt
 headline: Erzählen Sie mir von Ihrem Garten.

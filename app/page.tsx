@@ -156,12 +156,16 @@ function QuoteSection() {
   if (!quote) return null
   return (
     <RevealSection id={quote.section} className="py-20 md:py-36 px-6 md:px-14 text-center max-w-[820px] mx-auto">
-      <span className="font-['Cormorant_Garamond',serif] text-[6rem] leading-[0.4] text-studio-accent opacity-50 block mb-7">
-        &ldquo;
-      </span>
+
       <p className="font-['Cormorant_Garamond',serif] text-[clamp(1.6rem,3vw,2.4rem)] font-light italic leading-[1.5] text-[#2A1F14]">
-        {quote.text}
+        <div className="text-left font-['Cormorant_Garamond',serif] text-[6rem] leading-[0.4] text-studio-accent opacity-50 mb-4">
+          &ldquo;
+        </div>
+        {quote.text}      
       </p>
+      <div className="text-right font-['Cormorant_Garamond',serif] text-[6rem] leading-[0.4] text-studio-accent opacity-50 mt-7">
+        &rdquo;
+      </div>
       <p className="mt-10 text-[10px] tracking-[0.22em] uppercase text-studio-tertiary">
         {quote.author}
       </p>

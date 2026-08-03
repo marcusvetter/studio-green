@@ -20,9 +20,12 @@ collections:
     delete: false
     fields:
       - { label: Titel, name: title, widget: string }
-      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Kürzerer Titel für die Navigation. Fällt auf den Titel zurück, wenn leer." }
+      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Name in der Navigationsleiste. Nur relevant, wenn 'In Navigation anzeigen' aktiv ist. Leer lassen, um den Titel zu verwenden." }
+      - { label: In Navigation anzeigen, name: show_in_nav, widget: boolean, default: true, hint: "Bestimmt, ob dieser Abschnitt in der Navigationsleiste erscheint." }
       - { label: Section-Identifier, name: section, widget: hidden, default: intro }
       - { label: Reihenfolge, name: order, widget: hidden, default: 1 }
+      - { label: Überzeile, name: eyebrow, widget: string, required: false, hint: "Kleine Zeile oberhalb der Überschrift (z. B. 'Über meine Arbeit')." }
+      - { label: Überschrift, name: headline, widget: string, hint: "Große Überschrift des Intro-Abschnitts." }
       - { label: Full-Bleed Bild, name: fullbleed_image, widget: image, required: false, hint: "Vollformat-Bild, das nach diesem Abschnitt angezeigt wird." }
       - { label: Bildunterschrift, name: fullbleed_caption, widget: string, required: false, hint: "Optionale Bildunterschrift für das Full-Bleed Bild." }
       - { label: Text, name: body, widget: markdown, hint: "Markdown-Text für den Intro-Abschnitt." }
@@ -34,7 +37,8 @@ collections:
     delete: false
     fields:
       - { label: Titel, name: title, widget: string }
-      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Kürzerer Titel für die Navigation. Fällt auf den Titel zurück, wenn leer." }
+      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Name in der Navigationsleiste. Nur relevant, wenn 'In Navigation anzeigen' aktiv ist. Leer lassen, um den Titel zu verwenden." }
+      - { label: In Navigation anzeigen, name: show_in_nav, widget: boolean, default: true, hint: "Bestimmt, ob dieser Abschnitt in der Navigationsleiste erscheint." }
       - { label: Section-Identifier, name: section, widget: hidden, default: projects }
       - { label: Reihenfolge, name: order, widget: hidden, default: 2 }
       - label: Projekte
@@ -66,9 +70,12 @@ collections:
     delete: false
     fields:
       - { label: Titel, name: title, widget: string }
-      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Kürzerer Titel für die Navigation. Fällt auf den Titel zurück, wenn leer." }
+      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Name in der Navigationsleiste. Nur relevant, wenn 'In Navigation anzeigen' aktiv ist. Leer lassen, um den Titel zu verwenden." }
+      - { label: In Navigation anzeigen, name: show_in_nav, widget: boolean, default: true, hint: "Bestimmt, ob dieser Abschnitt in der Navigationsleiste erscheint." }
       - { label: Section-Identifier, name: section, widget: hidden, default: services }
       - { label: Reihenfolge, name: order, widget: hidden, default: 3 }
+      - { label: Überzeile, name: eyebrow, widget: string, required: false, hint: "Kleine Zeile oberhalb der Überschrift (z. B. 'Leistungen')." }
+      - { label: Überschrift, name: headline, widget: string, hint: "Große Überschrift des Leistungen-Abschnitts. Zeilenumbruch mit \\n." }
       - { label: Full-Bleed Bild, name: fullbleed_image, widget: image, required: false, hint: "Vollformat-Bild, das nach diesem Abschnitt angezeigt wird." }
       - label: Leistungen
         name: cards
@@ -101,7 +108,8 @@ collections:
     delete: false
     fields:
       - { label: Titel, name: title, widget: string }
-      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Kürzerer Titel für die Navigation. Fällt auf den Titel zurück, wenn leer." }
+      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Name in der Navigationsleiste. Nur relevant, wenn 'In Navigation anzeigen' aktiv ist. Leer lassen, um den Titel zu verwenden." }
+      - { label: In Navigation anzeigen, name: show_in_nav, widget: boolean, default: true, hint: "Bestimmt, ob dieser Abschnitt in der Navigationsleiste erscheint." }
       - { label: Section-Identifier, name: section, widget: hidden, default: quote }
       - { label: Reihenfolge, name: order, widget: hidden, default: 4 }
       - { label: Zitattext, name: quote_text, widget: string }
@@ -114,9 +122,12 @@ collections:
     delete: false
     fields:
       - { label: Titel, name: title, widget: string }
-      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Kürzerer Titel für die Navigation. Fällt auf den Titel zurück, wenn leer." }
+      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Name in der Navigationsleiste. Nur relevant, wenn 'In Navigation anzeigen' aktiv ist. Leer lassen, um den Titel zu verwenden." }
+      - { label: In Navigation anzeigen, name: show_in_nav, widget: boolean, default: true, hint: "Bestimmt, ob dieser Abschnitt in der Navigationsleiste erscheint." }
       - { label: Section-Identifier, name: section, widget: hidden, default: about-me }
       - { label: Reihenfolge, name: order, widget: hidden, default: 5 }
+      - { label: Überzeile, name: eyebrow, widget: string, required: false, hint: "Kleine Zeile oberhalb des Namens (z. B. 'Über mich')." }
+      - { label: Name, name: name, widget: string, hint: "Name als Überschrift (z. B. 'Verena Hoffmann')." }
       - { label: Bild, name: image, widget: image, required: false, hint: "Porträt für den Über-mich-Abschnitt." }
       - { label: Untertitel, name: subtitle, widget: string, required: false, hint: "Z. B. 'Biologin & Gartengestalterin · Andernach'." }
       - { label: Text, name: body, widget: markdown, hint: "Markdown-Text für den Über-mich-Abschnitt." }
@@ -128,8 +139,11 @@ collections:
     delete: false
     fields:
       - { label: Titel, name: title, widget: string }
+      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Name in der Navigationsleiste. Nur relevant, wenn 'In Navigation anzeigen' aktiv ist. Leer lassen, um den Titel zu verwenden." }
+      - { label: In Navigation anzeigen, name: show_in_nav, widget: boolean, default: true, hint: "Bestimmt, ob dieser Abschnitt in der Navigationsleiste erscheint." }
       - { label: Section-Identifier, name: section, widget: hidden, default: contact }
       - { label: Reihenfolge, name: order, widget: hidden, default: 6 }
+      - { label: Überzeile, name: eyebrow, widget: string, required: false, hint: "Kleine Zeile oberhalb der Überschrift (z. B. 'Kontakt')." }
       - { label: Überschrift, name: headline, widget: string }
       - { label: Kontakttext, name: text, widget: text }
       - { label: E-Mail, name: email, widget: string, hint: "Z. B. 'hallo@studio-green.de'." }

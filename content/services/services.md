@@ -1,9 +1,12 @@
 ---
 title: Leistungen
 nav_title: Leistungen
+show_in_nav: true
 section: services
 order: 3
 fullbleed_image: /media/garten-morgenlicht.jpeg
+eyebrow: "Leistungen"
+headline: "Vom ersten Gespräch\nbis zum letzten Stein."
 cards:
   - nr: "01"
     name: Gesamtprojekt

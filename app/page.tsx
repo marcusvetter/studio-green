@@ -37,10 +37,10 @@ function IntroSection() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
         <div>
           <p className="text-[10px] tracking-[0.22em] uppercase text-studio-tertiary mb-5 flex items-center gap-3 before:content-[''] before:inline-block before:w-6 before:h-px before:bg-studio-tertiary">
-            Über meine Arbeit
+            {intro.eyebrow}
           </p>
           <h1 className="font-['Cormorant_Garamond',serif] text-[clamp(1.7rem,3vw,2.6rem)] font-light leading-[1.4] text-[#2A1F14]">
-            Ich gestalte Gärten, die Seelen berühren — und Gehölze, die Generationen überdauern.
+            {intro.headline}
           </h1>
         </div>
         <div>
@@ -105,10 +105,10 @@ function ServicesSection() {
       <div className="max-w-[1200px] mx-auto">
         <div className="mb-16">
           <p className="text-[10px] tracking-[0.22em] uppercase text-studio-tertiary mb-5 flex items-center gap-3 before:content-[''] before:inline-block before:w-6 before:h-px before:bg-studio-tertiary">
-            Leistungen
+            {services.eyebrow}
           </p>
-          <h2 className="font-['Cormorant_Garamond',serif] text-[2rem] font-light text-[#F5F0E8] mt-4 mb-0">
-            Vom ersten Gespräch<br />bis zum letzten Stein.
+          <h2 className="font-['Cormorant_Garamond',serif] text-[2rem] font-light text-[#F5F0E8] mt-4 mb-0 whitespace-pre-line">
+            {services.headline}
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px">
@@ -158,9 +158,9 @@ function QuoteSection() {
     <RevealSection id={quote.section} className="py-20 md:py-36 px-6 md:px-14 text-center max-w-[820px] mx-auto">
 
       <p className="font-['Cormorant_Garamond',serif] text-[clamp(1.6rem,3vw,2.4rem)] font-light italic leading-[1.5] text-[#2A1F14]">
-        <div className="text-left font-['Cormorant_Garamond',serif] text-[6rem] leading-[0.4] text-studio-accent opacity-50 mb-4">
+        <span className="block text-left font-['Cormorant_Garamond',serif] text-[6rem] leading-[0.4] text-studio-accent opacity-50 mb-4">
           &ldquo;
-        </div>
+        </span>
         {quote.text}      
       </p>
       <div className="text-right font-['Cormorant_Garamond',serif] text-[6rem] leading-[0.4] text-studio-accent opacity-50 mt-7">
@@ -186,10 +186,10 @@ function AboutSection() {
         )}
         <div>
           <p className="text-[10px] tracking-[0.22em] uppercase text-studio-tertiary mb-5 flex items-center gap-3 before:content-[''] before:inline-block before:w-6 before:h-px before:bg-studio-tertiary">
-            Über mich
+            {about.eyebrow}
           </p>
           <h2 className="font-['Cormorant_Garamond',serif] text-[clamp(2rem,3.5vw,3rem)] font-light text-[#2A1F14] mb-1">
-            Verena Hoffmann
+            {about.name}
           </h2>
           {about.subtitle && (
             <p className="text-[11px] tracking-[0.12em] text-studio-tertiary uppercase mb-10">
@@ -213,7 +213,7 @@ function ContactSection() {
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-start">
         <div>
           <p className="text-[10px] tracking-[0.22em] uppercase text-studio-tertiary mb-5 flex items-center gap-3 before:content-[''] before:inline-block before:w-6 before:h-px before:bg-studio-tertiary">
-            Kontakt
+            {contact.eyebrow}
           </p>
           <h2 className="font-['Cormorant_Garamond',serif] text-[clamp(1.8rem,3vw,2.6rem)] font-light leading-[1.3] text-[#2A1F14] mb-4 mt-4">
             {contact.headline}

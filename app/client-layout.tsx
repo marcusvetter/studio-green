@@ -42,9 +42,13 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
   const [scrolled, setScrolled] = useState(false)
   const [animationDone, setAnimationDone] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [solidIn, setSolidIn] = useState(pathname !== '/')
   const [vpW, setVpW] = useState(1920)
   const [vpH, setVpH] = useState(1080)
   const isSolid = pathname !== '/' || scrolled
+  const isMobile = vpW < 768
+  const navSolid = isMobile ? solidIn : isSolid
+  const navVisible = pathname !== '/' || (isMobile ? solidIn : animationDone)
   const svgRef = useRef<SVGSVGElement>(null)
   const groupRef = useRef<SVGGElement>(null)
 
@@ -60,6 +64,16 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
     }, delay)
     return () => clearTimeout(timer)
   }, [pathname])
+
+  // Fade the mobile nav's solid state in once the hero animation completes
+  useEffect(() => {
+    if (pathname !== '/') {
+      setSolidIn(true)
+      return
+    }
+    if (!animationDone) return
+    setSolidIn(true)
+  }, [pathname, animationDone])
 
   // Scroll: track scrolled state
   useEffect(() => {
@@ -133,16 +147,12 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
           className="fixed w-2.5 h-2.5 rounded-full bg-[#1C2E1A] pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-multiply transition-[opacity] duration-200"
         />
 
-        {/* Mobile nav: always visible, always solid */}
-        <div className="md:hidden">
-          <Nav navItems={navItems} solid={true} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} onLogoClick={scrollToTop} />
+        {/* Nav: fades in after hero animation on home, shown immediately on other pages.
+            Always rendered; the class toggle uses explicit keyframes (0% -> opacity 0),
+            so the fade plays in every browser regardless of paint timing. */}
+        <div className={`block ${navVisible ? 'nav-fade-in' : 'opacity-0'}`}>
+          <Nav navItems={navItems} solid={navSolid} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} onLogoClick={scrollToTop} />
         </div>
-        {/* Desktop nav: fades in after hero animation on home */}
-        {(pathname !== '/' || animationDone) && (
-          <div className="hidden md:block" style={{ animation: 'fadeIn 0.7s ease-in-out' }}>
-            <Nav navItems={navItems} solid={isSolid} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} onLogoClick={scrollToTop} />
-          </div>
-        )}
 
         {/* Hero: relative, scrolls away naturally */}
         {pathname === '/' && (
@@ -257,13 +267,13 @@ function Nav({ navItems, solid, mobileMenuOpen, setMobileMenuOpen, onLogoClick }
       <div className={`fixed top-0 left-0 right-0 z-10 bg-[#1C2E1A] transition-all duration-300 ease-in-out md:hidden ${
         mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
       }`}>
-        <div className="flex flex-col items-end px-6 py-24 gap-2">
+        <div className="flex flex-col items-end px-6 pt-16 pb-6 gap-1.5">
           {navItems.map(item => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="text-[#F5F0E8] text-base no-underline py-2 tracking-wide hover:text-[#C9B99A] transition-colors"
+              className="text-[#F5F0E8] text-base no-underline py-1.5 tracking-wide hover:text-[#C9B99A] transition-colors"
             >
               {item.label}
             </Link>

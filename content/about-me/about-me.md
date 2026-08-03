@@ -1,8 +1,11 @@
 ---
 title: Über mich
 nav_title: Über mich
+show_in_nav: true
 section: about-me
 order: 5
+eyebrow: "Über mich"
+name: "Verena Hoffmann"
 image: /media/about-me Medium.jpeg
 subtitle: "Biologin & Gartengestalterin · Andernach"
 ---

@@ -7,10 +7,13 @@ export type Section = {
   navTitle?: string
   section: string
   order: number
+  showInNav: boolean
 }
 
 export type IntroSection = Section & {
   body: string
+  eyebrow?: string
+  headline?: string
   fullbleedImage?: string
   fullbleedCaption?: string
 }
@@ -42,6 +45,8 @@ export type ServiceCard = {
 
 export type ServicesSection = Section & {
   cards: ServiceCard[]
+  eyebrow?: string
+  headline?: string
   fullbleedImage?: string
 }
 
@@ -52,11 +57,14 @@ export type QuoteSection = Section & {
 
 export type AboutSection = Section & {
   image?: string
+  eyebrow?: string
+  name?: string
   subtitle?: string
   body: string
 }
 
 export type ContactSection = Section & {
+  eyebrow?: string
   headline: string
   text: string
   email: string
@@ -89,6 +97,7 @@ function parseSection(data: Record<string, unknown>): Section {
     navTitle: data.nav_title ? String(data.nav_title) : undefined,
     section: String(data.section),
     order: Number(data.order),
+    showInNav: data.show_in_nav !== false,
   }
 }
 
@@ -96,6 +105,7 @@ export function loadSections(): Section[] {
   return SINGLE_SECTIONS
     .map(({ dir, file }) => readSectionFile(dir, file, (data) => parseSection(data)))
     .filter((section): section is Section => section !== undefined)
+    .filter(section => section.showInNav)
     .sort((a, b) => a.order - b.order)
 }
 
@@ -103,6 +113,8 @@ export function loadIntro(): IntroSection | undefined {
   return readSectionFile("intro", "intro.md", (data, content) => ({
     ...parseSection(data),
     body: content,
+    eyebrow: data.eyebrow ? String(data.eyebrow) : undefined,
+    headline: data.headline ? String(data.headline) : undefined,
     fullbleedImage: data.fullbleed_image ? String(data.fullbleed_image) : undefined,
     fullbleedCaption: data.fullbleed_caption ? String(data.fullbleed_caption) : undefined,
   } as IntroSection))
@@ -142,6 +154,8 @@ export function loadServices(): ServicesSection | undefined {
     return {
       ...parseSection(data),
       cards,
+      eyebrow: data.eyebrow ? String(data.eyebrow) : undefined,
+      headline: data.headline ? String(data.headline) : undefined,
       fullbleedImage: data.fullbleed_image ? String(data.fullbleed_image) : undefined,
     } as ServicesSection
   })
@@ -159,6 +173,8 @@ export function loadAbout(): AboutSection | undefined {
   return readSectionFile("about-me", "about-me.md", (data, content) => ({
     ...parseSection(data),
     image: data.image ? String(data.image) : undefined,
+    eyebrow: data.eyebrow ? String(data.eyebrow) : undefined,
+    name: data.name ? String(data.name) : undefined,
     subtitle: data.subtitle ? String(data.subtitle) : undefined,
     body: content,
   } as AboutSection))
@@ -167,6 +183,7 @@ export function loadAbout(): AboutSection | undefined {
 export function loadContact(): ContactSection | undefined {
   return readSectionFile("contact", "contact.md", (data) => ({
     ...parseSection(data),
+    eyebrow: data.eyebrow ? String(data.eyebrow) : undefined,
     headline: String(data.headline || ""),
     text: String(data.text || ""),
     email: String(data.email || ""),

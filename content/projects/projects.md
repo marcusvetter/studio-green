@@ -1,6 +1,7 @@
 ---
 title: Ausgewählte Gärten
 nav_title: Gärten
+show_in_nav: true
 section: projects
 order: 2
 projects:

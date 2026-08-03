@@ -1,8 +1,11 @@
 ---
 title: Über meine Arbeit
 nav_title: Arbeit
+show_in_nav: true
 section: intro
 order: 1
+eyebrow: "Über meine Arbeit"
+headline: "Ich gestalte Gärten, die Seelen berühren — und Gehölze, die Generationen überdauern."
 fullbleed_image: /media/graeser-morgenlicht.jpeg
 fullbleed_caption: "Gräser, die dem Wind folgen."
 ---

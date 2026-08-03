@@ -62,20 +62,25 @@ export type ContactSection = Section & {
   email: string
 }
 
-function loadDir<T extends object>(dirName: string, transform: (data: Record<string, unknown>, content: string, file: string) => T): T[] {
-  const contentDir = path.join(process.cwd(), "content", dirName)
-  if (!fs.existsSync(contentDir)) return []
+const SINGLE_SECTIONS = [
+  { dir: "intro", file: "intro.md" },
+  { dir: "projects", file: "projects.md" },
+  { dir: "services", file: "services.md" },
+  { dir: "quote", file: "quote.md" },
+  { dir: "about-me", file: "about-me.md" },
+  { dir: "contact", file: "contact.md" },
+] as const
 
-  const files = fs.readdirSync(contentDir).filter(f => f.endsWith(".md"))
-  return files.map(file => {
-    const raw = fs.readFileSync(path.join(contentDir, file), "utf-8")
-    const { data, content } = matter(raw)
-    return transform(data as Record<string, unknown>, content, file)
-  }).sort((a, b) => {
-    const aOrder = "order" in a ? (a as unknown as Section).order : 0
-    const bOrder = "order" in b ? (b as unknown as Section).order : 0
-    return aOrder - bOrder
-  })
+function readSectionFile<T extends object>(
+  dir: string,
+  file: string,
+  transform: (data: Record<string, unknown>, content: string, file: string) => T
+): T | undefined {
+  const filePath = path.join(process.cwd(), "content", dir, file)
+  if (!fs.existsSync(filePath)) return undefined
+  const raw = fs.readFileSync(filePath, "utf-8")
+  const { data, content } = matter(raw)
+  return transform(data as Record<string, unknown>, content, file)
 }
 
 function parseSection(data: Record<string, unknown>): Section {
@@ -88,21 +93,23 @@ function parseSection(data: Record<string, unknown>): Section {
 }
 
 export function loadSections(): Section[] {
-  return loadDir("sections", (data) => parseSection(data))
+  return SINGLE_SECTIONS
+    .map(({ dir, file }) => readSectionFile(dir, file, (data) => parseSection(data)))
+    .filter((section): section is Section => section !== undefined)
+    .sort((a, b) => a.order - b.order)
 }
 
 export function loadIntro(): IntroSection | undefined {
-  const items = loadDir("sections", (data, content) => ({
+  return readSectionFile("intro", "intro.md", (data, content) => ({
     ...parseSection(data),
     body: content,
     fullbleedImage: data.fullbleed_image ? String(data.fullbleed_image) : undefined,
     fullbleedCaption: data.fullbleed_caption ? String(data.fullbleed_caption) : undefined,
   } as IntroSection))
-  return items.find(s => s.section === "intro")
 }
 
 export function loadProjects(): ProjectsSection | undefined {
-  const items = loadDir("sections", (data) => {
+  return readSectionFile("projects", "projects.md", (data) => {
     const rawProjects = data.projects as Record<string, unknown>[] | undefined
     const projects: Project[] = (rawProjects || []).map(p => ({
       nr: String(p.nr),
@@ -113,11 +120,10 @@ export function loadProjects(): ProjectsSection | undefined {
     }))
     return { ...parseSection(data), projects } as ProjectsSection
   })
-  return items.find(s => s.section === "projects")
 }
 
 export function loadServices(): ServicesSection | undefined {
-  const items = loadDir("sections", (data) => {
+  return readSectionFile("services", "services.md", (data) => {
     const rawCards = data.cards as Record<string, unknown>[] | undefined
     const cards: ServiceCard[] = (rawCards || []).map(c => {
       const rawSteps = c.steps as Record<string, unknown>[] || []
@@ -139,34 +145,30 @@ export function loadServices(): ServicesSection | undefined {
       fullbleedImage: data.fullbleed_image ? String(data.fullbleed_image) : undefined,
     } as ServicesSection
   })
-  return items.find(s => s.section === "services")
 }
 
 export function loadQuote(): QuoteSection | undefined {
-  const items = loadDir("sections", (data) => ({
+  return readSectionFile("quote", "quote.md", (data) => ({
     ...parseSection(data),
     text: String(data.quote_text || ""),
     author: String(data.author || ""),
   } as QuoteSection))
-  return items.find(s => s.section === "quote")
 }
 
 export function loadAbout(): AboutSection | undefined {
-  const items = loadDir("sections", (data, content) => ({
+  return readSectionFile("about-me", "about-me.md", (data, content) => ({
     ...parseSection(data),
     image: data.image ? String(data.image) : undefined,
     subtitle: data.subtitle ? String(data.subtitle) : undefined,
     body: content,
   } as AboutSection))
-  return items.find(s => s.section === "about-me")
 }
 
 export function loadContact(): ContactSection | undefined {
-  const items = loadDir("sections", (data) => ({
+  return readSectionFile("contact", "contact.md", (data) => ({
     ...parseSection(data),
     headline: String(data.headline || ""),
     text: String(data.text || ""),
     email: String(data.email || ""),
   } as ContactSection))
-  return items.find(s => s.section === "contact")
 }

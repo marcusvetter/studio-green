@@ -13,150 +13,123 @@ editor:
   preview: false
 
 collections:
-  - name: sections
-    label: Sections
-    label_singular: Section
-    folder: content/sections
-    create: true
+  - name: intro
+    label: Intro
+    folder: content/intro
+    create: false
+    delete: false
     fields:
-      - label: Title
-        name: title
-        widget: string
-      - label: Navigation Title
-        name: nav_title
-        widget: string
-        required: false
-        hint: "Optional shorter title for the navigation bar. Falls back to Title if empty."
-      - label: Section Identifier
-        name: section
-        widget: string
-        hint: "Machine-readable identifier used as the HTML id (e.g. intro, projects, services)"
-      - label: Order
-        name: order
-        widget: number
-        value_type: int
-        min: 0
-      - label: Image
-        name: image
-        widget: image
-        required: false
-        hint: "Used by the about-me section."
-      - label: Full-bleed Image
-        name: fullbleed_image
-        widget: image
-        required: false
-        hint: "Optional full-width image shown after this section (used by the intro and services sections)."
-      - label: Full-bleed Caption
-        name: fullbleed_caption
-        widget: string
-        required: false
-        hint: "Optional caption for the full-bleed image (used by the intro section)."
-      - label: Image Position
-        name: image_position
-        widget: select
-        options:
-          - left
-          - right
-        default: left
-        required: false
-      - label: Subtitle
-        name: subtitle
-        widget: string
-        required: false
-        hint: "Used by the about-me section (e.g. 'Biologin & Gartendesignerin · Andernach')."
-      - label: Body
-        name: body
-        widget: markdown
-        required: false
-        hint: "Markdown body for intro and about-me sections."
-      - label: Quote Text
-        name: quote_text
-        widget: string
-        required: false
-        hint: "Used by the quote section."
-      - label: Author
-        name: author
-        widget: string
-        required: false
-        hint: "Used by the quote section (e.g. 'Verena Hoffmann · Studio Green')."
-      - label: Headline
-        name: headline
-        widget: string
-        required: false
-        hint: "Used by the contact section."
-      - label: Contact Text
-        name: text
-        widget: text
-        required: false
-        hint: "Used by the contact section."
-      - label: Email
-        name: email
-        widget: string
-        required: false
-        hint: "Used by the contact section (e.g. 'hallo@studio-green.de')."
-      - label: Projects
+      - { label: Titel, name: title, widget: string }
+      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Kürzerer Titel für die Navigation. Fällt auf den Titel zurück, wenn leer." }
+      - { label: Section-Identifier, name: section, widget: hidden, default: intro }
+      - { label: Reihenfolge, name: order, widget: hidden, default: 1 }
+      - { label: Full-Bleed Bild, name: fullbleed_image, widget: image, required: false, hint: "Vollformat-Bild, das nach diesem Abschnitt angezeigt wird." }
+      - { label: Bildunterschrift, name: fullbleed_caption, widget: string, required: false, hint: "Optionale Bildunterschrift für das Full-Bleed Bild." }
+      - { label: Text, name: body, widget: markdown, hint: "Markdown-Text für den Intro-Abschnitt." }
+
+  - name: projects
+    label: Projekte
+    folder: content/projects
+    create: false
+    delete: false
+    fields:
+      - { label: Titel, name: title, widget: string }
+      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Kürzerer Titel für die Navigation. Fällt auf den Titel zurück, wenn leer." }
+      - { label: Section-Identifier, name: section, widget: hidden, default: projects }
+      - { label: Reihenfolge, name: order, widget: hidden, default: 2 }
+      - label: Projekte
         name: projects
         widget: list
-        required: false
-        hint: "Used by the projects section. Each item is a garden project."
+        hint: "Jeder Eintrag ist ein Gartenprojekt."
         field:
-          label: Project
+          label: Projekt
           name: project
           widget: object
           fields:
-            - label: Number
-              name: nr
-              widget: string
-            - label: Name
-              name: name
-              widget: string
-            - label: Description
-              name: description
-              widget: text
-            - label: Image URL
-              name: image
-              widget: string
+            - { label: Nummer, name: nr, widget: string, hint: "Z. B. 001, 002, ..." }
+            - { label: Name, name: name, widget: string }
+            - { label: Beschreibung, name: description, widget: text }
+            - { label: Bild, name: image, widget: image }
             - label: Tags
               name: tags
               widget: list
+              required: false
               field:
                 label: Tag
                 name: tag
                 widget: string
-      - label: Service Cards
+
+  - name: services
+    label: Leistungen
+    folder: content/services
+    create: false
+    delete: false
+    fields:
+      - { label: Titel, name: title, widget: string }
+      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Kürzerer Titel für die Navigation. Fällt auf den Titel zurück, wenn leer." }
+      - { label: Section-Identifier, name: section, widget: hidden, default: services }
+      - { label: Reihenfolge, name: order, widget: hidden, default: 3 }
+      - { label: Full-Bleed Bild, name: fullbleed_image, widget: image, required: false, hint: "Vollformat-Bild, das nach diesem Abschnitt angezeigt wird." }
+      - label: Leistungen
         name: cards
         widget: list
-        required: false
-        hint: "Used by the services section. Each item is a service category with steps."
+        hint: "Jeder Eintrag ist eine Leistungskategorie mit Schritten."
         field:
-          label: Card
+          label: Karte
           name: card
           widget: object
           fields:
-            - label: Number
-              name: nr
-              widget: string
-            - label: Name
-              name: name
-              widget: string
-            - label: Tagline
-              name: tagline
-              widget: string
-            - label: Note
-              name: note
-              widget: string
-              required: false
-            - label: Steps
+            - { label: Nummer, name: nr, widget: string, hint: "Z. B. 01, 02, 03, ..." }
+            - { label: Name, name: name, widget: string }
+            - { label: Tagline, name: tagline, widget: string }
+            - { label: Anmerkung, name: note, widget: string, required: false }
+            - label: Schritte
               name: steps
               widget: list
               field:
-                label: Step
+                label: Schritt
                 name: step
                 widget: object
                 fields:
-                  - label: Title
-                    name: title
-                    widget: string
-                  - label: Description
-                    name: description
-                    widget: text
+                  - { label: Titel, name: title, widget: string }
+                  - { label: Beschreibung, name: description, widget: text }
+
+  - name: quote
+    label: Zitat
+    folder: content/quote
+    create: false
+    delete: false
+    fields:
+      - { label: Titel, name: title, widget: string }
+      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Kürzerer Titel für die Navigation. Fällt auf den Titel zurück, wenn leer." }
+      - { label: Section-Identifier, name: section, widget: hidden, default: quote }
+      - { label: Reihenfolge, name: order, widget: hidden, default: 4 }
+      - { label: Zitattext, name: quote_text, widget: string }
+      - { label: Autor, name: author, widget: string, required: false, hint: "Z. B. 'Verena Hoffmann · Studio Green'." }
+
+  - name: about
+    label: Über mich
+    folder: content/about-me
+    create: false
+    delete: false
+    fields:
+      - { label: Titel, name: title, widget: string }
+      - { label: Navigationstitel, name: nav_title, widget: string, required: false, hint: "Kürzerer Titel für die Navigation. Fällt auf den Titel zurück, wenn leer." }
+      - { label: Section-Identifier, name: section, widget: hidden, default: about-me }
+      - { label: Reihenfolge, name: order, widget: hidden, default: 5 }
+      - { label: Bild, name: image, widget: image, required: false, hint: "Porträt für den Über-mich-Abschnitt." }
+      - { label: Untertitel, name: subtitle, widget: string, required: false, hint: "Z. B. 'Biologin & Gartengestalterin · Andernach'." }
+      - { label: Text, name: body, widget: markdown, hint: "Markdown-Text für den Über-mich-Abschnitt." }
+
+  - name: contact
+    label: Kontakt
+    folder: content/contact
+    create: false
+    delete: false
+    fields:
+      - { label: Titel, name: title, widget: string }
+      - { label: Section-Identifier, name: section, widget: hidden, default: contact }
+      - { label: Reihenfolge, name: order, widget: hidden, default: 6 }
+      - { label: Überschrift, name: headline, widget: string }
+      - { label: Kontakttext, name: text, widget: text }
+      - { label: E-Mail, name: email, widget: string, hint: "Z. B. 'hallo@studio-green.de'." }

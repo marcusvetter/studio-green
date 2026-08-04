@@ -51,6 +51,7 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
   const navVisible = pathname !== '/' || (isMobile ? solidIn : animationDone)
   const svgRef = useRef<SVGSVGElement>(null)
   const groupRef = useRef<SVGGElement>(null)
+  const navRef = useRef<HTMLDivElement>(null)
 
   // Hero animation: plays on mount
   useEffect(() => {
@@ -117,6 +118,19 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
     setMobileMenuOpen(false)
   }, [pathname])
 
+  // Fade the nav in once it becomes visible. In addition to the CSS
+  // `.nav-fade-in` animation, animate via the Web Animations API: it always
+  // plays regardless of CSS class-toggle / paint timing quirks.
+  useEffect(() => {
+    const el = navRef.current
+    if (!el || !navVisible) return
+    if (typeof el.animate !== 'function') return
+    el.animate(
+      [{ opacity: '0' }, { opacity: '1' }],
+      { duration: 700, easing: 'ease-in-out', fill: 'forwards' }
+    )
+  }, [navVisible])
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -148,9 +162,9 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
         />
 
         {/* Nav: fades in after hero animation on home, shown immediately on other pages.
-            Always rendered; the class toggle uses explicit keyframes (0% -> opacity 0),
-            so the fade plays in every browser regardless of paint timing. */}
-        <div className={`block ${navVisible ? 'nav-fade-in' : 'opacity-0'}`}>
+            Always rendered; the fade is driven both by the CSS `.nav-fade-in`
+            animation and by a Web Animations API effect on navRef. */}
+        <div ref={navRef} className={`block relative z-30 ${navVisible ? 'nav-fade-in' : 'opacity-0'}`}>
           <Nav navItems={navItems} solid={navSolid} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} onLogoClick={scrollToTop} />
         </div>
 

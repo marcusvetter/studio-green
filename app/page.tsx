@@ -111,11 +111,12 @@ function ServicesSection() {
             {services.headline}
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px">
+        <div className="flex md:grid gap-px overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none md:grid-cols-3 -mx-6 md:mx-0">
+          <div aria-hidden className="basis-[7.5%] shrink-0 md:hidden" />
           {services.cards.map(card => (
             <div
               key={card.nr}
-              className="bg-white/[0.04] border border-studio-accent/20 p-11 md:p-9 flex flex-col transition-colors hover:bg-white/[0.07]"
+              className="basis-[85%] shrink-0 snap-center bg-white/[0.04] border border-studio-accent/20 p-11 md:p-9 flex flex-col transition-colors hover:bg-white/[0.07]"
             >
               <p className="text-[9px] tracking-[0.22em] uppercase text-studio-accent opacity-60 mb-6">{card.nr}</p>
               <h3 className="font-['Cormorant_Garamond',serif] text-[1.7rem] font-light text-[#F5F0E8] leading-[1.2] mb-3">
@@ -145,6 +146,7 @@ function ServicesSection() {
               )}
             </div>
           ))}
+          <div aria-hidden className="basis-[7.5%] shrink-0 md:hidden" />
         </div>
       </div>
     </section>

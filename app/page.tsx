@@ -61,38 +61,42 @@ function ProjectsSection() {
       <div className="flex justify-between items-baseline mb-20 border-b border-studio-accent pb-5">
         <h2 className="font-['Cormorant_Garamond',serif] text-[2.2rem] font-light text-[#2A1F14]">{projects.title}</h2>
       </div>
-      {projects.projects.map((project, i) => (
-        <div
-          key={project.nr}
-          className={`grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center mb-24 ${i % 2 === 1 ? "md:[direction:rtl]" : ""}`}
-        >
-          <div className="aspect-[4/3] overflow-hidden relative md:[direction:ltr]">
-            <img
-              src={project.image}
-              alt={project.name}
-              className="w-full h-full object-cover block transition-transform duration-700 hover:scale-[1.04]"
-              loading="lazy"
-            />
-          </div>
-          <div className="md:[direction:ltr]">
-            <p className="text-[10px] tracking-[0.22em] text-studio-accent mb-5">{project.nr}</p>
-            <h3 className="font-['Cormorant_Garamond',serif] text-[clamp(1.5rem,2.5vw,2.2rem)] font-light leading-[1.2] mb-5 text-[#2A1F14]">
-              {project.name}
-            </h3>
-            <p className="text-[14px] leading-[1.9] text-[#5a4a3a] mb-8">{project.description}</p>
-            <div className="flex gap-2.5 flex-wrap">
-              {project.tags.map(tag => (
-                <span
-                  key={tag}
-                  className="text-[9px] tracking-[0.18em] uppercase text-studio-tertiary border border-studio-tertiary px-3.5 py-[5px]"
-                >
-                  {tag}
-                </span>
-              ))}
+      <div className="flex md:grid gap-[2px] overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none md:grid-cols-1 -mx-6 md:mx-0">
+        <div aria-hidden className="basis-[7.5%] shrink-0 md:hidden" />
+        {projects.projects.map((project, i) => (
+          <div
+            key={project.nr}
+            className={`basis-[85%] shrink-0 snap-center grid grid-cols-1 md:grid-cols-2 content-start gap-8 md:gap-20 items-center mb-24 ${i % 2 === 1 ? "md:[direction:rtl]" : ""}`}
+          >
+            <div className="aspect-[4/3] overflow-hidden relative md:[direction:ltr]">
+              <img
+                src={project.image}
+                alt={project.name}
+                className="w-full h-full object-cover block transition-transform duration-700 hover:scale-[1.04]"
+                loading="lazy"
+              />
+            </div>
+            <div className="md:[direction:ltr]">
+              <p className="text-[10px] tracking-[0.22em] text-studio-accent mb-5">{project.nr}</p>
+              <h3 className="font-['Cormorant_Garamond',serif] text-[clamp(1.5rem,2.5vw,2.2rem)] font-light leading-[1.2] mb-5 text-[#2A1F14]">
+                {project.name}
+              </h3>
+              <p className="text-[14px] leading-[1.9] text-[#5a4a3a] mb-8">{project.description}</p>
+              <div className="flex gap-2.5 flex-wrap">
+                {project.tags.map(tag => (
+                  <span
+                    key={tag}
+                    className="text-[9px] tracking-[0.18em] uppercase text-studio-tertiary border border-studio-tertiary px-3.5 py-[5px]"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+        <div aria-hidden className="basis-[7.5%] shrink-0 md:hidden" />
+      </div>
     </RevealSection>
   )
 }

@@ -8,8 +8,16 @@
   --color-studio-warm: #5a4a3a;
 }
 
-*, *::before, *::after {
-  cursor: none !important;
+@media (hover: hover) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
+@media (hover: none) {
+  #custom-cursor {
+    display: none;
+  }
 }
 
 body {

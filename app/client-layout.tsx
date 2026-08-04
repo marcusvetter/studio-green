@@ -110,6 +110,25 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
     return () => document.removeEventListener('mousemove', handleCursorMove)
   }, [])
 
+  // Anchor scroll offset: keep `--scroll-offset` in sync with the actual fixed
+  // nav height so anchor links land flush below the nav instead of using a
+  // hardcoded guess. The nav always carries a 1px bottom border (transparent
+  // when non-solid), so its height is constant in every state.
+  useEffect(() => {
+    const nav = document.querySelector('nav')
+    if (!nav) return
+    const apply = () => {
+      document.documentElement.style.setProperty(
+        '--scroll-offset',
+        `${nav.getBoundingClientRect().height}px`
+      )
+    }
+    apply()
+    const ro = new ResizeObserver(apply)
+    ro.observe(nav)
+    return () => ro.disconnect()
+  }, [])
+
   // Reset on navigation
   useEffect(() => {
     if (!window.location.hash) {
@@ -233,7 +252,7 @@ function Nav({ navItems, solid, mobileMenuOpen, setMobileMenuOpen, onLogoClick }
         className={`fixed top-0 left-0 right-0 z-20 flex justify-between items-center transition-all duration-400 ${
           solid
             ? 'bg-[#F5F0E8]/95 backdrop-blur-[8px] border-b border-[#C9B99A]/50 px-6 md:px-12 py-4'
-            : 'bg-transparent px-6 md:px-12 py-4'
+            : 'bg-transparent border-b border-transparent px-6 md:px-12 py-4'
         }`}
       >
         <Link href="/" scroll={false} className="flex items-center no-underline shrink-0" onClick={onLogoClick}>

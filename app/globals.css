@@ -53,8 +53,12 @@ body {
 }
 
 @layer base {
+  :root {
+    --scroll-offset: 5.5rem;
+  }
+
   section {
-    scroll-margin-top: 2rem;
+    scroll-margin-top: var(--scroll-offset);
   }
 
   p {

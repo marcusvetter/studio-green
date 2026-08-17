@@ -18,11 +18,11 @@ cards:
       - title: Erstgespräch & Fragebogen
         description: Wir lernen Ihren Ort kennen — und was Sie sich von ihm wünschen. Ein strukturierter Fragebogen hilft, Bedürfnisse, Vorlieben und Budget klar zu fassen.
       - title: Konzeption
-        description: 'Aus dem Gespräch entsteht eine gestalterische Haltung: Stimmung, Raumfolge, Materialwelt. Noch kein Plan — aber eine klare Richtung.'
+        description: 'Aus dem Gespräch entsteht eine gestalterische Grundidee: Stimmung, Raumfolge, Materialwelt. Der rote Faden für die Gestaltung Ihres Gartens.'
       - title: Entwurfsplanung
         description: 'Der Garten bekommt Form: Maßstäbliche Pläne, Schnitte, Visualisierungen. Hier entscheiden wir gemeinsam, was bleibt. Digitale 2D Zeichnung oder auf Wunsch eine 3D Visualisierung'
       - title: Ausführungsplanung
-        description: Detailpläne, Maßangaben und Leistungsbeschreibungen für ausführende Betriebe — präzise genug, damit nichts dem Zufall überlassen bleibt.
+        description: Der Entwurf wird in ein präzises Planwerk übersetzt – die verlässliche Grundlage für eine saubere Umsetzung.
       - title: Pflanzplanung
         description: |-
           Sortenliste, Standortanalyse, Pflanzschema, Blühzeitenkalender, Stückzahlen. 
@@ -30,7 +30,7 @@ cards:
           Nach Lieferung der Pflanzen stellen wir sie aus, damit sie vom Fachunternehmer gesetzt werden können (größere Gehölze) oder pflanzen sie direkt ein.
   - nr: '02'
     name: Teilprojekt
-    tagline: Gezielte Planung für einen bestimmten Bereich oder eine einzelne Aufgabe.
+    tagline: Nicht jeder Garten muss neu gedacht werden. Manchmal braucht es nur den geschärften Blick für einen Bereich, eine Frage, einen nächsten Schritt.
     note: Umfang und Leistungstiefe werden individuell vereinbart.
     steps:
       - title: Bestandsaufnahme & Beratung
@@ -43,12 +43,12 @@ cards:
           Gehölze und Stauden, die zueinander passen — und zum Ort. Auf Wunsch bestellen wir die Pflanzen bei ausgewählten Baumschulen und Staudengärtnereien für Sie.
       - title: Pflanzservice
         description: Wir pflanzen die von uns bestellten Stauden und kleinere Gehölze.
-      - title: 365 Tage Gartenberatung
+      - title: 365 Tage Gartencoaching
         description: Wir erstellen einen Pflegekalender und besuche Sie und Ihrem Garten einmal im Quartal. Gemeinsam schauen wir uns den Zustand der Pflanzung an und nehmen korrigierende Maßnahmen vor.
   - nr: '03'
     name: Fernplanung
-    tagline: Professionelle Gartenplanung — ortsunabhängig, in drei Terminen.
-    note: Ideal für kleinere Gärten und klare Aufgabenstellungen. Deutschlandweit.
+    tagline: Für alle, die ihren Garten mit eigenen Händen umsetzen möchten, aber auf gestalterische und pflanzliche Expertise nicht verzichten wollen. Drei Termine.
+    note: Ideal für kleinere Gärten bis 300qm und klare Aufgabenstellungen. Deutschlandweit.
     steps:
       - title: Termin 1 · Kennenlernen
         description: Online-Gespräch mit Fragebogen und Fotoanalyse. Sie zeigen mir Ihren Garten per Video — ich höre zu und stelle Fragen.

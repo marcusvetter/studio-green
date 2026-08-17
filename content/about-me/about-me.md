@@ -14,6 +14,6 @@ Ich bin Gartendesignerin und komme ursprünglich aus der Biologie – aus dem ge
 
 Mit den Jahren ist aus diesem Blick mehr geworden als Fachwissen. Ein Gespür für Räume. Für Licht, für Proportionen, für die Wirkung, die eine Pflanze entfalten kann, wenn sie am richtigen Ort steht.
 
-Ich lese Gärten, bevor ich sie gestalte. ich spüre, welche Atmosphäre ein Ort sucht, welches Gehölz ihn tragen kann und welche Ruhe darin liegt, wenn Pflanzenwissen und Gestaltung eins werden.
+Ich lese Gärten, bevor ich sie gestalte. Ich spüre, welche Atmosphäre ein Ort sucht, welches Gehölz ihn tragen kann und welche Ruhe darin liegt, wenn Pflanzenwissen und Gestaltung eins werden.
 
 Am Anfang jeder Arbeit steht Zuhören. Bevor ein Entwurf entsteht, möchte ich verstehen, wonach Sie sich sehnen. Erst dann wird aus Ihrem Garten ein Ort, der berührt.

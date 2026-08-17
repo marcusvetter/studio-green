@@ -1,17 +1,19 @@
 ---
-title: Über mich
-nav_title: Über mich
+title: About
+nav_title: About
 show_in_nav: true
 section: about-me
 order: 5
-eyebrow: "Über mich"
-name: "Verena Hoffmann"
+eyebrow: Über mich
+name: Verena Hoffmann
 image: /media/about-me Medium.jpeg
-subtitle: "Biologin & Gartengestalterin · Andernach"
+subtitle: Gartengestalterin & Biologin
 ---
 
-Ich bin aufgewachsen zwischen einem alten Obstgarten und einer Steinmauer, die niemand mehr kennt. Vielleicht erklärt das, warum meine Arbeit immer mit dem Zuhören beginnt — mit dem Ort, bevor er Garten wird.
+Ich bin Gartendesignerin und komme ursprünglich aus der Biologie – aus dem genauen Hinsehen, dem Verstehen von Wachstum und Zusammenhängen, von dem, was ein Ort im Innersten braucht, um zu leben.
 
-Ich arbeite ausschließlich mit Materialien, die Zeit nicht verstecken, sondern zeigen. Kebony und Muschelkalk verändern sich mit den Jahrzehnten. Das ist keine Schwäche — das ist ihre Geschichte.
+Mit den Jahren ist aus diesem Blick mehr geworden als Fachwissen. Ein Gespür für Räume. Für Licht, für Proportionen, für die Wirkung, die eine Pflanze entfalten kann, wenn sie am richtigen Ort steht.
 
-Meine Gärten entstehen langsam. Sie sind nicht für den ersten Sommer gemacht.
+Ich lese Gärten, bevor ich sie gestalte. ich spüre, welche Atmosphäre ein Ort sucht, welches Gehölz ihn tragen kann und welche Ruhe darin liegt, wenn Pflanzenwissen und Gestaltung eins werden.
+
+Am Anfang jeder Arbeit steht Zuhören. Bevor ein Entwurf entsteht, möchte ich verstehen, wonach Sie sich sehnen. Erst dann wird aus Ihrem Garten ein Ort, der berührt.

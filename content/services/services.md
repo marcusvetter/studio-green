@@ -56,4 +56,17 @@ cards:
         description: Ich präsentiere Konzept und Entwurfsplan. Wir besprechen, justieren, entscheiden. Ein Änderungszyklus ist möglich. Danach erstelle ich eine Pflanzliste mit Blühzeitenkalender und Stückzahlen.
       - title: Termin 3 · Übergabe
         description: Finaler Plan, Pflanzschema und Einkaufsliste werden übergeben. Ich beantworte letzte Fragen — Sie können loslegen.
+  - nr: '04'
+    name: Pflanzenkauf
+    tagline: Sie wissen schon, welche Pflanzen Sie gerne hätten.
+    note: Ohne Pflanzplan.
+    steps:
+      - title: Erstgespräch
+        description: Sie zeigen mir Ihre Pflanzliste und den Standort. Bei Bedarf prüfe ich, ob die Pflanzen zum Standort passen.
+      - title: Angebot
+        description: Ich hole Angebote bei ausgesuchten Staudengärtnereien und Baumschulen ein.
+      - title: Bestellung
+        description: Nach Rücksprache mit Ihnen bestelle ich Ihre Stauden und Gehölze.
+      - title: Lieferung
+        description: Sie bekommen Ihre Stauden und Gehölze geliefert und pflanzen sie selber ein.
 ---

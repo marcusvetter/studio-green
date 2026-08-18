@@ -10,7 +10,7 @@ image: /media/about-me Medium.jpeg
 subtitle: Gartengestalterin & Biologin
 ---
 
-Ich bin Gartendesignerin und komme ursprünglich aus der Biologie – aus dem genauen Hinsehen, dem Verstehen von Wachstum und Zusammenhängen. Und ich verstehe verstehe ich Pflanzen nicht nur als Gestaltungselement, sondern als das, was sie sind: lebendig, eigenwillig, im steten Wandel. Dieses Wissen um Charakter, Rhythmus und Wachstum über Jahre hinweg ist das Fundament meiner Arbeit.
+Ich bin Gartendesignerin und komme ursprünglich aus der Biologie – aus dem genauen Hinsehen, dem Verstehen von Wachstum und Zusammenhängen. Und ich verstehe Pflanzen nicht nur als Gestaltungselement, sondern als das, was sie sind: lebendig, eigenwillig, im steten Wandel. Dieses Wissen um Charakter, Rhythmus und Wachstum über Jahre hinweg ist das Fundament meiner Arbeit.
 
 Mit den Jahren ist aus diesem Blick mehr geworden als Fachwissen. Ein Gespür für Räume, für Licht, für Proportionen, für die Wirkung, die eine Pflanze entfalten kann, wenn sie am richtigen Ort steht.
 

@@ -8,7 +8,7 @@ eyebrow: Leistungen
 headline: |-
   Vom ersten Gespräch
   bis zum letzten Stein.
-fullbleed_image: /media/Garten_Nordseite_bearbeitet.png
+fullbleed_image: /media/Garten_Nordseite_bearbeitet.jpg
 cards:
   - nr: '01'
     name: Gesamtprojekt

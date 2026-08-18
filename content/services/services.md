@@ -16,7 +16,7 @@ cards:
     note: ''
     steps:
       - title: Erstgespräch & Fragebogen
-        description: Wir lernen Ihren Ort kennen — und was Sie sich von ihm wünschen. Ein strukturierter Fragebogen hilft, Bedürfnisse, Vorlieben und Budget klar zu fassen.
+        description: Ich lerne Ihren Ort kennen — und was Sie sich von ihm wünschen. Ein strukturierter Fragebogen hilft, Bedürfnisse, Vorlieben und Budget klar zu fassen.
       - title: Konzeption
         description: 'Aus dem Gespräch entsteht eine gestalterische Grundidee: Stimmung, Raumfolge, Materialwelt. Der rote Faden für die Gestaltung Ihres Gartens.'
       - title: Entwurfsplanung
@@ -27,10 +27,10 @@ cards:
         description: |-
           Sortenliste, Standortanalyse, Pflanzschema, Blühzeitenkalender, Stückzahlen. 
           Gehölze und Stauden, die zueinander passen — und zum Ort. 
-          Nach Lieferung der Pflanzen stellen wir sie aus, damit sie vom Fachunternehmer gesetzt werden können (größere Gehölze) oder pflanzen sie direkt ein.
+          Nach Lieferung der Pflanzen stelle ich sie aus, damit sie vom Fachunternehmer gesetzt werden können (größere Gehölze) oder pflanze sie direkt ein.
   - nr: '02'
     name: Teilprojekt
-    tagline: Nicht jeder Garten muss neu gedacht werden. Manchmal braucht es nur den geschärften Blick für einen Bereich, eine Frage, einen nächsten Schritt.
+    tagline: Nicht jeder Garten muss neu gedacht werden. Manchmal braucht es nur den geschärften Blick für einen Bereich oder die nächsten Schritte.
     note: Umfang und Leistungstiefe werden individuell vereinbart.
     steps:
       - title: Bestandsaufnahme & Beratung
@@ -40,11 +40,11 @@ cards:
       - title: Pflanzplanung (Teilbereich)
         description: |-
           Sortenliste, Standortanalyse, Pflanzschema, Blühzeitenkalender, Stückzahlen. 
-          Gehölze und Stauden, die zueinander passen — und zum Ort. Auf Wunsch bestellen wir die Pflanzen bei ausgewählten Baumschulen und Staudengärtnereien für Sie.
+          Gehölze und Stauden, die zueinander passen — und zum Ort. Auf Wunsch bestelle ich die Pflanzen bei ausgewählten Baumschulen und Staudengärtnereien für Sie.
       - title: Pflanzservice
-        description: Wir pflanzen die von uns bestellten Stauden und kleinere Gehölze.
+        description: Ich pflanze die von mir bestellten Stauden und kleinere Gehölze.
       - title: 365 Tage Gartencoaching
-        description: Wir erstellen einen Pflegekalender und besuche Sie und Ihrem Garten einmal im Quartal. Gemeinsam schauen wir uns den Zustand der Pflanzung an und nehmen korrigierende Maßnahmen vor.
+        description: Ich erstelle einen Pflegekalender und besuche Sie und Ihrem Garten einmal im Quartal. Gemeinsam schauen wir uns den Zustand der Pflanzung an und nehmen korrigierende Maßnahmen vor.
   - nr: '03'
     name: Fernplanung
     tagline: Für alle, die ihren Garten mit eigenen Händen umsetzen möchten, aber auf gestalterische und pflanzliche Expertise nicht verzichten wollen. Drei Termine.
@@ -59,7 +59,7 @@ cards:
   - nr: '04'
     name: Pflanzenkauf
     tagline: Sie wissen schon, welche Pflanzen Sie gerne hätten.
-    note: Ohne Pflanzplan.
+    note: Ohne Pflanzplan. Dafür mit Tipps und Pflegehinweisen zu den bestellten Pflanzen.
     steps:
       - title: Erstgespräch
         description: Sie zeigen mir Ihre Pflanzliste und den Standort. Bei Bedarf prüfe ich, ob die Pflanzen zum Standort passen.

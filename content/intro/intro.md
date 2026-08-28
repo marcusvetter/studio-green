@@ -6,7 +6,7 @@ section: intro
 order: 1
 eyebrow: Über meine Arbeit
 headline: Ich gestalte Gärten, die die Seele berühren — mit Gehölzen, die Generationen überdauern.
-fullbleed_image: /media/graeser-morgenlicht.jpeg
+fullbleed_image: /media/Verena_Edited_494A0353.jpg
 fullbleed_caption: Gräser, die dem Wind folgen.
 ---
 

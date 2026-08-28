@@ -21,8 +21,6 @@ cards:
         description: 'Aus dem Gespräch entsteht eine gestalterische Grundidee: Stimmung, Raumfolge, Materialwelt. Der rote Faden für die Gestaltung Ihres Gartens.'
       - title: Entwurfsplanung
         description: 'Der Garten bekommt Form: Maßstäbliche Pläne, Schnitte, Visualisierungen. Hier entscheiden wir gemeinsam, was bleibt. Digitale 2D Zeichnung oder auf Wunsch eine 3D Visualisierung'
-      - title: Ausführungsplanung
-        description: Der Entwurf wird in ein präzises Planwerk übersetzt – die verlässliche Grundlage für eine saubere Umsetzung.
       - title: Pflanzplanung
         description: |-
           Sortenliste, Standortanalyse, Pflanzschema, Blühzeitenkalender, Stückzahlen. 

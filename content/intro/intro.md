@@ -7,7 +7,7 @@ order: 1
 eyebrow: Über meine Arbeit
 headline: Ich gestalte Gärten, die die Seele berühren — mit Gehölzen, die Generationen überdauern.
 fullbleed_image: /media/Verena_Edited_494A0353.jpg
-fullbleed_caption: Gräser, die dem Wind folgen.
+fullbleed_caption: ''
 ---
 
 Ein Garten beginnt nicht auf dem Papier. Er beginnt mit einer Frage: Wie soll es sich anfühlen, hier zu stehen? Und er ist nie fertig – er lebt, verändert sich, wird mit jedem Jahr schöner. Genau das gestalte ich: Gärten, die natürlich und zugleich elegant sind, wild in ihrer Fülle und klar in ihrer Form.

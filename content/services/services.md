@@ -42,7 +42,7 @@ cards:
       - title: Pflanzservice
         description: Ich pflanze die von mir bestellten Stauden und kleinere Gehölze.
       - title: 365 Tage Gartencoaching
-        description: Ich erstelle einen Pflegekalender und besuche Sie und Ihrem Garten einmal im Quartal. Gemeinsam schauen wir uns den Zustand der Pflanzung an und nehmen korrigierende Maßnahmen vor.
+        description: Ich erstelle einen Pflegekalender und besuche Sie und Ihren Garten einmal im Quartal. Gemeinsam schauen wir uns den Zustand der Pflanzung an und nehmen korrigierende Maßnahmen vor.
   - nr: '03'
     name: Fernplanung
     tagline: Für alle, die ihren Garten mit eigenen Händen umsetzen möchten, aber auf gestalterische und pflanzliche Expertise nicht verzichten wollen. Drei Termine.

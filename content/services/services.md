@@ -49,11 +49,11 @@ cards:
     note: Ideal für kleinere Gärten bis 300qm und klare Aufgabenstellungen. Deutschlandweit.
     steps:
       - title: Termin 1 · Kennenlernen
-        description: Online-Gespräch mit Fragebogen und Fotoanalyse. Sie zeigen mir Ihren Garten per Video — ich höre zu und stelle Fragen.
+        description: Online-Gespräch mit Fragebogen und Fotoanalyse. Sie zeigen mir Ihren Garten per Video. Ich höre zu und stelle Fragen.
       - title: Termin 2 · Entwurf
         description: Ich präsentiere Konzept und Entwurfsplan. Wir besprechen, justieren, entscheiden. Ein Änderungszyklus ist möglich. Danach erstelle ich eine Pflanzliste mit Blühzeitenkalender und Stückzahlen.
       - title: Termin 3 · Übergabe
-        description: Finaler Plan, Pflanzschema und Einkaufsliste werden übergeben. Ich beantworte letzte Fragen — Sie können loslegen.
+        description: Finaler Plan, Pflanzschema und Einkaufsliste werden übergeben. Ich beantworte letzte Fragen. Danach können Sie loslegen.
   - nr: '03'
     name: Baumschulbesuch
     tagline: Manche Entscheidungen trifft man vor Ort, nicht am Schreibtisch.
@@ -76,5 +76,5 @@ cards:
       - title: Bestellung
         description: Nach Rücksprache mit Ihnen bestelle ich Ihre Stauden und Gehölze.
       - title: Lieferung
-        description: Sie bekommen Ihre Stauden und Gehölze geliefert und pflanzen sie selber ein.
+        description: Sie bekommen Ihre Stauden und Gehölze geliefert und pflanzen sie selbst ein.
 ---

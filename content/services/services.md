@@ -54,9 +54,9 @@ cards:
         description: Ich präsentiere Konzept und Entwurfsplan. Wir besprechen, justieren, entscheiden. Ein Änderungszyklus ist möglich. Danach erstelle ich eine Pflanzliste mit Blühzeitenkalender und Stückzahlen.
       - title: Termin 3 · Übergabe
         description: Finaler Plan, Pflanzschema und Einkaufsliste werden übergeben. Ich beantworte letzte Fragen. Danach können Sie loslegen.
-  - nr: '03'
+  - nr: '04'
     name: Baumschulbesuch
-    tagline: Manche Entscheidungen trifft man vor Ort, nicht am Schreibtisch.
+    tagline: Sie wünschen sich ein besonderes Gehölz für Ihren Garten.
     note: ''
     steps:
       - title: Gemeinsame Auswahl der Solitärgehölze
@@ -64,7 +64,7 @@ cards:
           Ich fahre mit Ihnen in die Baumschule und wir suchen die prägenden Gehölze Ihres Gartens gemeinsam aus. Wuchsform, Charakter und Ausstrahlung. Jeder Baum wird mit Bedacht gewählt.
 
           Ein Solitärgehölz trägt einen Garten über Jahrzehnte. Diese Entscheidung treffe nicht ich für Sie, sondern mit Ihnen gemeinsam – damit Sie von Anfang an eine Verbindung zu dem Baum haben, der Ihren Garten prägen wird.
-  - nr: '04'
+  - nr: '05'
     name: Pflanzenkauf
     tagline: Sie haben schon eine Pflanzidee und wünschen Sich Unterstützung bei der Auswahl, Beschaffung und Standortprüfung.
     note: Ohne Pflanzplan. Dafür mit Tipps und Pflegehinweisen zu den bestellten Pflanzen.

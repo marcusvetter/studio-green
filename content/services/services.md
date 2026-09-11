@@ -66,7 +66,7 @@ cards:
           Ein Solitärgehölz trägt einen Garten über Jahrzehnte. Diese Entscheidung treffe nicht ich für Sie, sondern mit Ihnen gemeinsam – damit Sie von Anfang an eine Verbindung zu dem Baum haben, der Ihren Garten prägen wird.
   - nr: '04'
     name: Pflanzenkauf
-    tagline: Sie wissen schon, welche Pflanzen Sie gerne hätten.
+    tagline: Sie haben schon eine Pflanzidee und wünschen Sich Unterstützung bei der Auswahl, Beschaffung und Standortprüfung.
     note: Ohne Pflanzplan. Dafür mit Tipps und Pflegehinweisen zu den bestellten Pflanzen.
     steps:
       - title: Erstgespräch

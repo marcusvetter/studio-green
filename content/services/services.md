@@ -16,7 +16,7 @@ cards:
     note: ''
     steps:
       - title: Erstgespräch & Fragebogen
-        description: Ich lerne Ihren Ort kennen — und was Sie sich von ihm wünschen. Ein strukturierter Fragebogen hilft, Bedürfnisse, Vorlieben und Budget klar zu fassen.
+        description: Ich lerne Ihren Ort kennen und was Sie sich von ihm wünschen. Ein strukturierter Fragebogen hilft, Bedürfnisse, Vorlieben und Budget klar zu fassen.
       - title: Konzeption
         description: 'Aus dem Gespräch entsteht eine gestalterische Grundidee: Stimmung, Raumfolge, Materialwelt. Der rote Faden für die Gestaltung Ihres Gartens.'
       - title: Entwurfsplanung
@@ -24,7 +24,7 @@ cards:
       - title: Pflanzplanung
         description: |-
           Sortenliste, Standortanalyse, Pflanzschema, Blühzeitenkalender, Stückzahlen. 
-          Gehölze und Stauden, die zueinander passen — und zum Ort. 
+          Gehölze und Stauden, die zueinander passen — und zu Ihrem Ort. 
           Nach Lieferung der Pflanzen stelle ich sie aus, damit sie vom Fachunternehmer gesetzt werden können (größere Gehölze) oder pflanze sie direkt ein.
   - nr: '02'
     name: Teilprojekt
@@ -32,7 +32,7 @@ cards:
     note: Umfang und Leistungstiefe werden individuell vereinbart.
     steps:
       - title: Bestandsaufnahme & Beratung
-        description: Wir schauen gemeinsam auf das, was ist — und was fehlt. Ein Gespräch vor Ort, ohne Fragebogen, direkt am Ort des Geschehens.
+        description: Wir schauen gemeinsam auf das, was ist und was fehlt. Ein Gespräch vor Ort, ohne Fragebogen, direkt am Ort des Geschehens.
       - title: Entwurfsplanung (Teilbereich)
         description: Plan und Visualisierung in 2D oder 3D für den gewünschten Ausschnitt — Terrasse, Eingangssituation, Sichtschutz oder Staudenbeet.
       - title: Pflanzplanung (Teilbereich)
@@ -54,6 +54,16 @@ cards:
         description: Ich präsentiere Konzept und Entwurfsplan. Wir besprechen, justieren, entscheiden. Ein Änderungszyklus ist möglich. Danach erstelle ich eine Pflanzliste mit Blühzeitenkalender und Stückzahlen.
       - title: Termin 3 · Übergabe
         description: Finaler Plan, Pflanzschema und Einkaufsliste werden übergeben. Ich beantworte letzte Fragen — Sie können loslegen.
+  - nr: '03'
+    name: Baumschulbesuch
+    tagline: Manche Entscheidungen trifft man vor Ort, nicht am Schreibtisch.
+    note: ''
+    steps:
+      - title: Gemeinsame Auswahl der Solitärgehölze
+        description: |-
+          Ich fahre mit Ihnen in die Baumschule und wir suchen die prägenden Gehölze Ihres Gartens gemeinsam aus. Wuchsform, Charakter und Ausstrahlung. Jeder Baum wird mit Bedacht gewählt.
+
+          Ein Solitärgehölz trägt einen Garten über Jahrzehnte. Diese Entscheidung treffe nicht ich für Sie, sondern mit Ihnen gemeinsam – damit Sie von Anfang an eine Verbindung zu dem Baum haben, der Ihren Garten prägen wird.
   - nr: '04'
     name: Pflanzenkauf
     tagline: Sie wissen schon, welche Pflanzen Sie gerne hätten.

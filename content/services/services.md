@@ -46,7 +46,7 @@ cards:
   - nr: '03'
     name: Fernplanung
     tagline: Für alle, die ihren Garten mit eigenen Händen umsetzen möchten, aber auf gestalterische und pflanzliche Expertise nicht verzichten wollen. Drei Termine.
-    note: Ideal für kleinere Gärten bis 300qm und klare Aufgabenstellungen. Deutschlandweit.
+    note: Ideal für kleinere Gärten bis 300m² und klare Aufgabenstellungen. Deutschlandweit.
     steps:
       - title: Termin 1 · Kennenlernen
         description: Online-Gespräch mit Fragebogen und Fotoanalyse. Sie zeigen mir Ihren Garten per Video. Ich höre zu und stelle Fragen.

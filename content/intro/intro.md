@@ -10,7 +10,7 @@ fullbleed_image: /media/Verena_Edited_494A0353.jpg
 fullbleed_caption: ''
 ---
 
-Ein Garten beginnt nicht auf dem Papier. Er beginnt mit einer Frage: Wie soll es sich anfühlen, hier zu stehen? Und er ist nie fertig – er lebt, verändert sich, wird mit jedem Jahr schöner. Genau das gestalte ich: Gärten, die natürlich und zugleich elegant sind, wild in ihrer Fülle und klar in ihrer Form.
+Ein Garten beginnt nicht auf dem Papier. Er beginnt mit einer Frage: Wie soll es sich anfühlen, hier zu stehen? Und er ist nie fertig. Er lebt, verändert sich, wird mit jedem Jahr schöner. Genau das gestalte ich: Gärten, die natürlich und zugleich elegant sind, wild in ihrer Fülle und klar in ihrer Form.
 
 Üppige Stauden und sorgfältig gewählte Gehölze schenken meinen Gärten zu jeder Jahreszeit ihre eigene Schönheit. Ich arbeite mit Materialien wie Holz, Stein und Metall – sie dürfen altern und entwickeln mit den Jahren eine Patina, die sie nur schöner macht. Und ich plane vorausschauend: mit Pflanzen, die der Hitze und Trockenheit trotzen, und Gärten, die auch in Zeiten des Klimawandels Bestand haben.
 

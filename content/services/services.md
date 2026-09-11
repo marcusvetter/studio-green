@@ -12,8 +12,8 @@ fullbleed_image: /media/Garten_Nordseite_bearbeitet.jpg
 cards:
   - nr: '01'
     name: Gesamtprojekt
-    tagline: Die vollständige Begleitung — von der ersten Idee bis zur Ausführung.
-    note: ''
+    tagline: Die vollständige Begleitung. Von der ersten Idee bis zur Ausführung.
+    note: Zwischen Koblenz und Bonn.
     steps:
       - title: Erstgespräch & Fragebogen
         description: Ich lerne Ihren Ort kennen und was Sie sich von ihm wünschen. Ein strukturierter Fragebogen hilft, Bedürfnisse, Vorlieben und Budget klar zu fassen.

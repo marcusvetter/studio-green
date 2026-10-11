@@ -9,6 +9,8 @@ projects:
     name: Sitzplatz für zwei
     description: Eine kleine Sitzgelegenheit für zwei Personen, eingerahmt von Gehölzen und Schattenstauden.
     image: /media/Garten Nordseite 2_bearbeitet 3.png
+    image_position_x: center
+    image_position_y: center
     tags:
       - Muschelkalk
       - Sitzplatz

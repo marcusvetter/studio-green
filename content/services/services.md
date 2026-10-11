@@ -9,6 +9,8 @@ headline: |-
   Vom ersten Gespräch
   bis zum letzten Stein.
 fullbleed_image: /media/Garten_Nordseite_bearbeitet.jpg
+fullbleed_image_position_x: center
+fullbleed_image_position_y: center
 cards:
   - nr: '01'
     name: Gesamtprojekt

@@ -31,7 +31,7 @@ collections:
       - label: Bildausrichtung horizontal
         name: fullbleed_image_position_x
         widget: select
-        required: false
+        required: true
         default: center
         options:
           - { label: Links, value: left }
@@ -41,7 +41,7 @@ collections:
       - label: Bildausrichtung vertikal
         name: fullbleed_image_position_y
         widget: select
-        required: false
+        required: true
         default: center
         options:
           - { label: Oben, value: top }
@@ -84,7 +84,7 @@ collections:
             - label: Bildausrichtung horizontal
               name: image_position_x
               widget: select
-              required: false
+              required: true
               default: center
               options:
                 - { label: Links, value: left }
@@ -94,7 +94,7 @@ collections:
             - label: Bildausrichtung vertikal
               name: image_position_y
               widget: select
-              required: false
+              required: true
               default: center
               options:
                 - { label: Oben, value: top }
@@ -127,7 +127,7 @@ collections:
       - label: Bildausrichtung horizontal
         name: fullbleed_image_position_x
         widget: select
-        required: false
+        required: true
         default: center
         options:
           - { label: Links, value: left }
@@ -137,7 +137,7 @@ collections:
       - label: Bildausrichtung vertikal
         name: fullbleed_image_position_y
         widget: select
-        required: false
+        required: true
         default: center
         options:
           - { label: Oben, value: top }
@@ -206,7 +206,7 @@ collections:
       - label: Bildausrichtung horizontal
         name: image_position_x
         widget: select
-        required: false
+        required: true
         default: center
         options:
           - { label: Links, value: left }
@@ -216,7 +216,7 @@ collections:
       - label: Bildausrichtung vertikal
         name: image_position_y
         widget: select
-        required: false
+        required: true
         default: center
         options:
           - { label: Oben, value: top }

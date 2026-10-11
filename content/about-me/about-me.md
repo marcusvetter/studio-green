@@ -7,6 +7,8 @@ order: 5
 eyebrow: Über mich
 name: Verena Hoffmann
 image: /media/Verena_retouched_494A0234_II.jpg
+image_position_x: center
+image_position_y: center
 subtitle: Gartengestalterin & Biologin
 ---
 

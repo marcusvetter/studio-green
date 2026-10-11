@@ -1,6 +1,6 @@
 import type { ReactNode } from "react"
 import type { Metadata } from "next"
-import { loadSections } from "@/lib/content"
+import { loadSections, loadHero } from "@/lib/content"
 import ClientLayout from "./client-layout"
 
 export type NavItem = { href: string; label: string }
@@ -16,8 +16,9 @@ export default function Layout({ children }: { children: ReactNode }) {
     href: `/#${s.section}`,
     label: s.navTitle || s.title,
   }))
+  const hero = loadHero()
 
   return (
-    <ClientLayout navItems={navItems}>{children}</ClientLayout>
+    <ClientLayout navItems={navItems} hero={hero}>{children}</ClientLayout>
   )
 }

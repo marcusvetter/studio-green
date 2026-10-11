@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from "next/image"
 import type { NavItem } from "./layout"
+import type { Hero } from "@/lib/content"
 import "./globals.css"
 
 function animateHero(
@@ -36,7 +37,7 @@ function animateHero(
   requestAnimationFrame(tick)
 }
 
-export default function ClientLayout({ children, navItems }: { children: ReactNode; navItems: NavItem[] }) {
+export default function ClientLayout({ children, navItems, hero }: { children: ReactNode; navItems: NavItem[]; hero: Hero }) {
 
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
@@ -191,8 +192,11 @@ export default function ClientLayout({ children, navItems }: { children: ReactNo
         {pathname === '/' && (
           <header className="relative w-full h-screen overflow-hidden">
             <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: 'url(/header-background.jpeg)' }}
+              className="absolute inset-0 bg-cover"
+              style={{
+                backgroundImage: `url(${hero.image})`,
+                backgroundPosition: `${hero.imagePositionX} ${hero.imagePositionY}`,
+              }}
             />
 
             <svg

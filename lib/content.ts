@@ -102,6 +102,14 @@ export type ContactSection = Section & {
   email: string
 }
 
+export const DEFAULT_HERO_IMAGE = "/header-background.jpeg"
+
+export type Hero = {
+  image: string
+  imagePositionX: ImagePositionX
+  imagePositionY: ImagePositionY
+}
+
 const SINGLE_SECTIONS = [
   { dir: "intro", file: "intro.md" },
   { dir: "projects", file: "projects.md" },
@@ -230,4 +238,18 @@ export function loadContact(): ContactSection | undefined {
     text: String(data.text || ""),
     email: String(data.email || ""),
   } as ContactSection))
+}
+
+export function loadHero(): Hero {
+  return (
+    readSectionFile("hero", "hero.md", (data) => ({
+      image: data.image ? String(data.image) : DEFAULT_HERO_IMAGE,
+      imagePositionX: parseImagePositionX(data.image_position_x),
+      imagePositionY: parseImagePositionY(data.image_position_y),
+    } as Hero)) ?? {
+      image: DEFAULT_HERO_IMAGE,
+      imagePositionX: DEFAULT_IMAGE_POSITION_X,
+      imagePositionY: DEFAULT_IMAGE_POSITION_Y,
+    }
+  )
 }

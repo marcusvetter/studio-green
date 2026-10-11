@@ -13,6 +13,34 @@ editor:
   preview: false
 
 collections:
+  - name: hero
+    label: Startseite (Hero)
+    folder: content/hero
+    create: false
+    delete: false
+    fields:
+      - { label: Hero-Bild, name: image, widget: image, required: false, hint: "Hintergrundbild des Kopfbereichs. Leer lassen für das Standardbild (/header-background.jpeg)." }
+      - label: Bildausrichtung horizontal
+        name: image_position_x
+        widget: select
+        required: true
+        default: center
+        options:
+          - { label: Links, value: left }
+          - { label: Zentriert, value: center }
+          - { label: Rechts, value: right }
+        hint: "Welcher horizontale Ausschnitt sichtbar bleibt, wenn das Bild beschnitten wird (background-cover)."
+      - label: Bildausrichtung vertikal
+        name: image_position_y
+        widget: select
+        required: true
+        default: center
+        options:
+          - { label: Oben, value: top }
+          - { label: Mitte, value: center }
+          - { label: Unten, value: bottom }
+        hint: "Welcher vertikale Ausschnitt sichtbar bleibt, wenn das Bild beschnitten wird (background-cover)."
+
   - name: intro
     label: Intro
     folder: content/intro

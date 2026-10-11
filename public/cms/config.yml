@@ -19,7 +19,7 @@ collections:
     create: false
     delete: false
     fields:
-      - { label: Hero-Bild, name: image, widget: image, required: false, hint: "Hintergrundbild des Kopfbereichs. Leer lassen für das Standardbild (/header-background.jpeg)." }
+      - { label: Hero-Bild, name: image, widget: image, required: true, hint: "Hintergrundbild des Kopfbereichs der Startseite." }
       - label: Bildausrichtung horizontal
         name: image_position_x
         widget: select

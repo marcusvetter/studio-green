@@ -102,7 +102,7 @@ export type ContactSection = Section & {
   email: string
 }
 
-export const DEFAULT_HERO_IMAGE = "/header-background.jpeg"
+export const DEFAULT_HERO_IMAGE = "/media/header-background.jpeg"
 
 export type Hero = {
   image: string

@@ -10,12 +10,28 @@ export type Section = {
   showInNav: boolean
 }
 
+export type ImagePositionX = "left" | "center" | "right"
+export type ImagePositionY = "top" | "center" | "bottom"
+
+export const DEFAULT_IMAGE_POSITION_X: ImagePositionX = "center"
+export const DEFAULT_IMAGE_POSITION_Y: ImagePositionY = "center"
+
+export function parseImagePositionX(value: unknown): ImagePositionX {
+  return value === "left" || value === "right" ? value : DEFAULT_IMAGE_POSITION_X
+}
+
+export function parseImagePositionY(value: unknown): ImagePositionY {
+  return value === "top" || value === "bottom" ? value : DEFAULT_IMAGE_POSITION_Y
+}
+
 export type IntroSection = Section & {
   body: string
   eyebrow?: string
   headline?: string
   fullbleedImage?: string
   fullbleedCaption?: string
+  fullbleedImagePositionX: ImagePositionX
+  fullbleedImagePositionY: ImagePositionY
 }
 
 export type Project = {
@@ -23,6 +39,8 @@ export type Project = {
   name: string
   description: string
   image: string
+  imagePositionX: ImagePositionX
+  imagePositionY: ImagePositionY
   tags: string[]
 }
 
@@ -48,6 +66,8 @@ export type ServicesSection = Section & {
   eyebrow?: string
   headline?: string
   fullbleedImage?: string
+  fullbleedImagePositionX: ImagePositionX
+  fullbleedImagePositionY: ImagePositionY
 }
 
 export type QuoteSection = Section & {
@@ -57,6 +77,8 @@ export type QuoteSection = Section & {
 
 export type AboutSection = Section & {
   image?: string
+  imagePositionX: ImagePositionX
+  imagePositionY: ImagePositionY
   eyebrow?: string
   name?: string
   subtitle?: string
@@ -117,6 +139,8 @@ export function loadIntro(): IntroSection | undefined {
     headline: data.headline ? String(data.headline) : undefined,
     fullbleedImage: data.fullbleed_image ? String(data.fullbleed_image) : undefined,
     fullbleedCaption: data.fullbleed_caption ? String(data.fullbleed_caption) : undefined,
+    fullbleedImagePositionX: parseImagePositionX(data.fullbleed_image_position_x),
+    fullbleedImagePositionY: parseImagePositionY(data.fullbleed_image_position_y),
   } as IntroSection))
 }
 
@@ -128,6 +152,8 @@ export function loadProjects(): ProjectsSection | undefined {
       name: String(p.name),
       description: String(p.description),
       image: String(p.image),
+      imagePositionX: parseImagePositionX(p.image_position_x),
+      imagePositionY: parseImagePositionY(p.image_position_y),
       tags: (p.tags as string[] || []),
     }))
     return { ...parseSection(data), projects } as ProjectsSection
@@ -157,6 +183,8 @@ export function loadServices(): ServicesSection | undefined {
       eyebrow: data.eyebrow ? String(data.eyebrow) : undefined,
       headline: data.headline ? String(data.headline) : undefined,
       fullbleedImage: data.fullbleed_image ? String(data.fullbleed_image) : undefined,
+      fullbleedImagePositionX: parseImagePositionX(data.fullbleed_image_position_x),
+      fullbleedImagePositionY: parseImagePositionY(data.fullbleed_image_position_y),
     } as ServicesSection
   })
 }
@@ -173,6 +201,8 @@ export function loadAbout(): AboutSection | undefined {
   return readSectionFile("about-me", "about-me.md", (data, content) => ({
     ...parseSection(data),
     image: data.image ? String(data.image) : undefined,
+    imagePositionX: parseImagePositionX(data.image_position_x),
+    imagePositionY: parseImagePositionY(data.image_position_y),
     eyebrow: data.eyebrow ? String(data.eyebrow) : undefined,
     name: data.name ? String(data.name) : undefined,
     subtitle: data.subtitle ? String(data.subtitle) : undefined,

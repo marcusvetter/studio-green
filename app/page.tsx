@@ -8,6 +8,7 @@ import {
   loadAbout,
   loadContact,
 } from "@/lib/content"
+import type { ImagePositionX, ImagePositionY } from "@/lib/content"
 import RevealSection from "./reveal-section"
 
 export const metadata: Metadata = {
@@ -15,10 +16,34 @@ export const metadata: Metadata = {
   description: "Studio Green",
 }
 
-function FullbleedImage({ src, alt, caption, className = "" }: { src: string; alt: string; caption?: string; className?: string }) {
+function objectPosition(x: ImagePositionX, y: ImagePositionY): string {
+  return `${x} ${y}`
+}
+
+function FullbleedImage({
+  src,
+  alt,
+  caption,
+  positionX,
+  positionY,
+  className = "",
+}: {
+  src: string
+  alt: string
+  caption?: string
+  positionX: ImagePositionX
+  positionY: ImagePositionY
+  className?: string
+}) {
   return (
     <div className={`relative w-full overflow-hidden ${className}`}>
-      <img src={src} alt={alt} className="w-full h-full object-cover block" loading="lazy" />
+      <img
+        src={src}
+        alt={alt}
+        className="w-full h-full object-cover block"
+        style={{ objectPosition: objectPosition(positionX, positionY) }}
+        loading="lazy"
+      />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-studio-primary/55" />
       {caption && (
         <p className="absolute bottom-10 left-6 md:left-14 font-['Cormorant_Garamond',serif] italic text-base text-[#F5F0E8]/65 tracking-[0.04em]">
@@ -73,6 +98,7 @@ function ProjectsSection() {
                 src={project.image}
                 alt={project.name}
                 className="w-full h-full object-cover block transition-transform duration-700 hover:scale-[1.04]"
+                style={{ objectPosition: objectPosition(project.imagePositionX, project.imagePositionY) }}
                 loading="lazy"
               />
             </div>
@@ -187,7 +213,12 @@ function AboutSection() {
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-12 md:gap-24 items-center">
         {about.image && (
           <div className="aspect-[3/4] overflow-hidden">
-            <img src={about.image} alt={about.title} className="w-full h-full object-cover block" />
+            <img
+              src={about.image}
+              alt={about.title}
+              className="w-full h-full object-cover block"
+              style={{ objectPosition: objectPosition(about.imagePositionX, about.imagePositionY) }}
+            />
           </div>
         )}
         <div>
@@ -250,6 +281,8 @@ export default function Home() {
           src={intro.fullbleedImage}
           alt="Wildgräser im Morgenlicht"
           caption={intro.fullbleedCaption}
+          positionX={intro.fullbleedImagePositionX}
+          positionY={intro.fullbleedImagePositionY}
           className="h-[70vh] min-h-[420px]"
         />
       )}
@@ -259,6 +292,8 @@ export default function Home() {
         <FullbleedImage
           src={services.fullbleedImage}
           alt="Garten im Morgenlicht"
+          positionX={services.fullbleedImagePositionX}
+          positionY={services.fullbleedImagePositionY}
           className="h-[55vh] min-h-[360px]"
         />
       )}

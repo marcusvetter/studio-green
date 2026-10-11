@@ -28,6 +28,26 @@ collections:
       - { label: Überschrift, name: headline, widget: string, hint: "Große Überschrift des Intro-Abschnitts." }
       - { label: Full-Bleed Bild, name: fullbleed_image, widget: image, required: false, hint: "Vollformat-Bild, das nach diesem Abschnitt angezeigt wird." }
       - { label: Bildunterschrift, name: fullbleed_caption, widget: string, required: false, hint: "Optionale Bildunterschrift für das Full-Bleed Bild." }
+      - label: Bildausrichtung horizontal
+        name: fullbleed_image_position_x
+        widget: select
+        required: false
+        default: center
+        options:
+          - { label: Links, value: left }
+          - { label: Zentriert, value: center }
+          - { label: Rechts, value: right }
+        hint: "Welcher horizontale Ausschnitt sichtbar bleibt, wenn das Bild beschnitten wird (object-cover)."
+      - label: Bildausrichtung vertikal
+        name: fullbleed_image_position_y
+        widget: select
+        required: false
+        default: center
+        options:
+          - { label: Oben, value: top }
+          - { label: Mitte, value: center }
+          - { label: Unten, value: bottom }
+        hint: "Welcher vertikale Ausschnitt sichtbar bleibt, wenn das Bild beschnitten wird (object-cover)."
       - { label: Text, name: body, widget: markdown, hint: "Markdown-Text für den Intro-Abschnitt." }
 
   - name: projects
@@ -54,6 +74,26 @@ collections:
             - { label: Name, name: name, widget: string }
             - { label: Beschreibung, name: description, widget: text }
             - { label: Bild, name: image, widget: image }
+            - label: Bildausrichtung horizontal
+              name: image_position_x
+              widget: select
+              required: false
+              default: center
+              options:
+                - { label: Links, value: left }
+                - { label: Zentriert, value: center }
+                - { label: Rechts, value: right }
+              hint: "Welcher horizontale Ausschnitt sichtbar bleibt, wenn das Bild beschnitten wird (object-cover)."
+            - label: Bildausrichtung vertikal
+              name: image_position_y
+              widget: select
+              required: false
+              default: center
+              options:
+                - { label: Oben, value: top }
+                - { label: Mitte, value: center }
+                - { label: Unten, value: bottom }
+              hint: "Welcher vertikale Ausschnitt sichtbar bleibt, wenn das Bild beschnitten wird (object-cover)."
             - label: Tags
               name: tags
               widget: list
@@ -77,6 +117,26 @@ collections:
       - { label: Überzeile, name: eyebrow, widget: string, required: false, hint: "Kleine Zeile oberhalb der Überschrift (z. B. 'Leistungen')." }
       - { label: Überschrift, name: headline, widget: string, hint: "Große Überschrift des Leistungen-Abschnitts. Zeilenumbruch mit \\n." }
       - { label: Full-Bleed Bild, name: fullbleed_image, widget: image, required: false, hint: "Vollformat-Bild, das nach diesem Abschnitt angezeigt wird." }
+      - label: Bildausrichtung horizontal
+        name: fullbleed_image_position_x
+        widget: select
+        required: false
+        default: center
+        options:
+          - { label: Links, value: left }
+          - { label: Zentriert, value: center }
+          - { label: Rechts, value: right }
+        hint: "Welcher horizontale Ausschnitt sichtbar bleibt, wenn das Bild beschnitten wird (object-cover)."
+      - label: Bildausrichtung vertikal
+        name: fullbleed_image_position_y
+        widget: select
+        required: false
+        default: center
+        options:
+          - { label: Oben, value: top }
+          - { label: Mitte, value: center }
+          - { label: Unten, value: bottom }
+        hint: "Welcher vertikale Ausschnitt sichtbar bleibt, wenn das Bild beschnitten wird (object-cover)."
       - label: Leistungen
         name: cards
         widget: list
@@ -129,6 +189,26 @@ collections:
       - { label: Überzeile, name: eyebrow, widget: string, required: false, hint: "Kleine Zeile oberhalb des Namens (z. B. 'Über mich')." }
       - { label: Name, name: name, widget: string, hint: "Name als Überschrift (z. B. 'Verena Hoffmann')." }
       - { label: Bild, name: image, widget: image, required: false, hint: "Porträt für den Über-mich-Abschnitt." }
+      - label: Bildausrichtung horizontal
+        name: image_position_x
+        widget: select
+        required: false
+        default: center
+        options:
+          - { label: Links, value: left }
+          - { label: Zentriert, value: center }
+          - { label: Rechts, value: right }
+        hint: "Welcher horizontale Ausschnitt sichtbar bleibt, wenn das Bild beschnitten wird (object-cover)."
+      - label: Bildausrichtung vertikal
+        name: image_position_y
+        widget: select
+        required: false
+        default: center
+        options:
+          - { label: Oben, value: top }
+          - { label: Mitte, value: center }
+          - { label: Unten, value: bottom }
+        hint: "Welcher vertikale Ausschnitt sichtbar bleibt, wenn das Bild beschnitten wird (object-cover)."
       - { label: Untertitel, name: subtitle, widget: string, required: false, hint: "Z. B. 'Biologin & Gartengestalterin · Andernach'." }
       - { label: Text, name: body, widget: markdown, hint: "Markdown-Text für den Über-mich-Abschnitt." }
 

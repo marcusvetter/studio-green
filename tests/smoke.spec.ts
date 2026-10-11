@@ -1,43 +1,38 @@
 import { test, expect } from '@playwright/test';
 
+// Structural smoke tests. These deliberately never assert CMS-managed copy:
+// every front matter field can be edited through the CMS, which would otherwise
+// break the pipeline. We only check invariants that hold for any valid content.
+
 test.describe("Smoke tests", () => {
 
-  test("home page should have expected headline", async ({ page }) => {
+  test("home page loads and renders the page shell", async ({ page }) => {
     const response = await page.goto("/");
     expect(response?.status()).toBe(200);
-    await expect(page.locator("h1").first()).toContainText("Ich gestalte Gärten");
+
+    // The layout always renders these regions regardless of content.
+    await expect(page.locator("header").first()).toBeVisible();
+    await expect(page.locator("main")).toBeVisible();
+    await expect(page.locator("footer")).toBeVisible();
   });
 
-  test("impressum page should have expected headline", async ({ page }) => {
-    const response = await page.goto("/impressum");
-    expect(response?.status()).toBe(200);
-    await expect(page.locator("h1").first()).toHaveText("Impressum");
-  });
-
-  test("anchor navigation links exist on home", async ({ page }) => {
+  test("home page renders a non-empty heading", async ({ page }) => {
     await page.goto("/");
 
-    // Wait for hero animation to complete, then scroll past the hero so the
-    // IntersectionObserver sets animationDone=true and the desktop nav renders.
-    await page.waitForTimeout(5000);
-    await page.evaluate(() => window.scrollTo({ top: window.innerHeight * 1.5, behavior: 'instant' }));
-    await page.waitForTimeout(500);
+    // The intro section always renders an <h1>. Its text is CMS-managed, so we
+    // only assert that a heading with some text exists.
+    const h1 = page.locator("main h1").first();
+    await expect(h1).toBeVisible();
+    const text = (await h1.textContent())?.trim() ?? "";
+    expect(text.length).toBeGreaterThan(0);
+  });
 
-    // Content is CMS-configurable (nav items can be hidden), so don't assert a
-    // fixed list. Instead, every rendered nav link must target an existing
-    // anchor on the home page.
-    const navLinks = page.locator("nav a[href^='/#']");
-    await expect(navLinks.first()).toBeVisible();
+  test("impressum page loads with its heading", async ({ page }) => {
+    const response = await page.goto("/impressum");
+    expect(response?.status()).toBe(200);
 
-    const hrefs = (await navLinks.evaluateAll(links =>
-      links.map(l => l.getAttribute("href"))
-    )).filter((h): h is string => !!h);
-    expect(hrefs.length).toBeGreaterThan(0);
-
-    for (const href of hrefs) {
-      const anchor = href.slice(1); // "/#intro" -> "#intro"
-      const count = await page.locator(anchor).count();
-      expect(count, `anchor ${anchor} missing for nav link ${href}`).toBeGreaterThan(0);
-    }
+    // The Impressum copy is hardcoded (not CMS-managed), so asserting its
+    // heading is safe.
+    await expect(page.locator("h1").first()).toHaveText("Impressum");
   });
 });

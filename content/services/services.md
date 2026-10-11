@@ -11,6 +11,7 @@ headline: |-
 fullbleed_image: /media/Garten_Nordseite_bearbeitet.jpg
 fullbleed_image_position_x: center
 fullbleed_image_position_y: center
+fullbleed_min_height: 500
 cards:
   - nr: '01'
     name: Gesamtprojekt

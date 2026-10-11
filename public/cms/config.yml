@@ -48,6 +48,13 @@ collections:
           - { label: Mitte, value: center }
           - { label: Unten, value: bottom }
         hint: "Welcher vertikale Ausschnitt sichtbar bleibt, wenn das Bild beschnitten wird (object-cover)."
+      - label: Full-Bleed Min-Höhe (px)
+        name: fullbleed_min_height
+        widget: number
+        required: false
+        default: 420
+        value_type: int
+        hint: "Mindesthöhe des Full-Bleed-Bildes in Pixeln. Leer lassen für Standard (420 px)."
       - { label: Text, name: body, widget: markdown, hint: "Markdown-Text für den Intro-Abschnitt." }
 
   - name: projects
@@ -137,6 +144,13 @@ collections:
           - { label: Mitte, value: center }
           - { label: Unten, value: bottom }
         hint: "Welcher vertikale Ausschnitt sichtbar bleibt, wenn das Bild beschnitten wird (object-cover)."
+      - label: Full-Bleed Min-Höhe (px)
+        name: fullbleed_min_height
+        widget: number
+        required: false
+        default: 360
+        value_type: int
+        hint: "Mindesthöhe des Full-Bleed-Bildes in Pixeln. Leer lassen für Standard (360 px)."
       - label: Leistungen
         name: cards
         widget: list

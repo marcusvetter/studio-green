@@ -26,6 +26,7 @@ function FullbleedImage({
   caption,
   positionX,
   positionY,
+  minHeight,
   className = "",
 }: {
   src: string
@@ -33,10 +34,14 @@ function FullbleedImage({
   caption?: string
   positionX: ImagePositionX
   positionY: ImagePositionY
+  minHeight: number
   className?: string
 }) {
   return (
-    <div className={`relative w-full overflow-hidden ${className}`}>
+    <div
+      className={`relative w-full overflow-hidden ${className}`}
+      style={{ minHeight: `${minHeight}px` }}
+    >
       <img
         src={src}
         alt={alt}
@@ -283,7 +288,8 @@ export default function Home() {
           caption={intro.fullbleedCaption}
           positionX={intro.fullbleedImagePositionX}
           positionY={intro.fullbleedImagePositionY}
-          className="h-[70vh] min-h-[420px]"
+          minHeight={intro.fullbleedMinHeight}
+          className="h-[70vh]"
         />
       )}
       <ProjectsSection />
@@ -294,7 +300,8 @@ export default function Home() {
           alt="Garten im Morgenlicht"
           positionX={services.fullbleedImagePositionX}
           positionY={services.fullbleedImagePositionY}
-          className="h-[55vh] min-h-[360px]"
+          minHeight={services.fullbleedMinHeight}
+          className="h-[55vh]"
         />
       )}
       <QuoteSection />

@@ -24,6 +24,14 @@ export function parseImagePositionY(value: unknown): ImagePositionY {
   return value === "top" || value === "bottom" ? value : DEFAULT_IMAGE_POSITION_Y
 }
 
+export const DEFAULT_INTRO_FULLBLEED_MIN_HEIGHT = 420
+export const DEFAULT_SERVICES_FULLBLEED_MIN_HEIGHT = 360
+
+export function parseMinHeight(value: unknown, fallback: number): number {
+  const parsed = Number(value)
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback
+}
+
 export type IntroSection = Section & {
   body: string
   eyebrow?: string
@@ -32,6 +40,7 @@ export type IntroSection = Section & {
   fullbleedCaption?: string
   fullbleedImagePositionX: ImagePositionX
   fullbleedImagePositionY: ImagePositionY
+  fullbleedMinHeight: number
 }
 
 export type Project = {
@@ -68,6 +77,7 @@ export type ServicesSection = Section & {
   fullbleedImage?: string
   fullbleedImagePositionX: ImagePositionX
   fullbleedImagePositionY: ImagePositionY
+  fullbleedMinHeight: number
 }
 
 export type QuoteSection = Section & {
@@ -141,6 +151,7 @@ export function loadIntro(): IntroSection | undefined {
     fullbleedCaption: data.fullbleed_caption ? String(data.fullbleed_caption) : undefined,
     fullbleedImagePositionX: parseImagePositionX(data.fullbleed_image_position_x),
     fullbleedImagePositionY: parseImagePositionY(data.fullbleed_image_position_y),
+    fullbleedMinHeight: parseMinHeight(data.fullbleed_min_height, DEFAULT_INTRO_FULLBLEED_MIN_HEIGHT),
   } as IntroSection))
 }
 
@@ -185,6 +196,7 @@ export function loadServices(): ServicesSection | undefined {
       fullbleedImage: data.fullbleed_image ? String(data.fullbleed_image) : undefined,
       fullbleedImagePositionX: parseImagePositionX(data.fullbleed_image_position_x),
       fullbleedImagePositionY: parseImagePositionY(data.fullbleed_image_position_y),
+      fullbleedMinHeight: parseMinHeight(data.fullbleed_min_height, DEFAULT_SERVICES_FULLBLEED_MIN_HEIGHT),
     } as ServicesSection
   })
 }

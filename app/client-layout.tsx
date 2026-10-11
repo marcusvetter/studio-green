@@ -300,7 +300,7 @@ function Nav({ navItems, solid, mobileMenuOpen, setMobileMenuOpen, onLogoClick }
       <div className={`fixed top-0 left-0 right-0 z-10 bg-[#1C2E1A] transition-all duration-300 ease-in-out md:hidden ${
         mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
       }`}>
-        <div className="flex flex-col items-end px-6 pt-16 pb-6 gap-1.5">
+        <div className="flex flex-col items-end px-6 pt-28 pb-6 gap-1.5">
           {navItems.map(item => (
             <Link
               key={item.href}

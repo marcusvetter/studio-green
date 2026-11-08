@@ -20,7 +20,8 @@ pnpm install
 pnpm dev        # start dev server on http://localhost:3000
 pnpm build      # static export to /out/
 pnpm lint       # ESLint (flat config)
-pnpm test       # Playwright E2E smoke tests
+pnpm typecheck  # TypeScript without emitting files
+pnpm test       # Playwright E2E, content-pipeline and interaction tests
 ```
 
 ## Content

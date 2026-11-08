@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "npx serve@latest out",
     "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
     "test": "playwright test",
     "test:ui": "playwright test --ui"
   },

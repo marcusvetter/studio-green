@@ -1,37 +1,63 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test'
 
-test.describe("Assets and links", () => {
+test.describe('Assets and links', () => {
 
-  test("every rendered image has a source", async ({ page }) => {
-    await page.goto("/");
+  test('every rendered image has a source and an alt attribute', async ({ page }) => {
+    await page.goto('/')
 
-    // Image paths are CMS-managed, so we only assert that every image the page
-    // renders points somewhere. This catches templating regressions without
-    // depending on which image the editor picked.
-    const images = page.locator("img");
-    const count = await images.count();
+    // Image paths and alt texts are CMS-managed, so we only assert that every
+    // image the page renders is addressable and accessible. This catches
+    // templating regressions without depending on which image the editor picked.
+    const images = page.locator('img')
+    const count = await images.count()
+    expect(count, 'the page should render at least one image').toBeGreaterThan(0)
 
     for (let i = 0; i < count; i++) {
-      const src = await images.nth(i).getAttribute("src");
-      expect(src?.trim(), `image #${i} is missing a src`).toBeTruthy();
+      const image = images.nth(i)
+      const src = await image.getAttribute('src')
+      const alt = await image.getAttribute('alt')
+
+      expect(src?.trim(), `image #${i} is missing a src`).toBeTruthy()
+      expect(alt, `image #${i} is missing an alt attribute`).not.toBeNull()
     }
-  });
+  })
 
-  test("hardcoded internal links resolve", async ({ page }) => {
-    await page.goto("/");
+  test('every rendered image resolves', async ({ page, request }) => {
+    await page.goto('/')
 
-    // Only nav and footer links are hardcoded in the layout. Body links come
-    // from CMS markdown, so they are intentionally excluded here.
+    const srcs = await page.locator('img[src]').evaluateAll(images =>
+      Array.from(new Set(
+        images
+          .map(image => image.getAttribute('src'))
+          .filter((src): src is string => !!src && !src.startsWith('data:'))
+      ))
+    )
+
+    expect(srcs.length).toBeGreaterThan(0)
+
+    for (const src of srcs) {
+      const response = await request.get(src)
+      expect(response.status(), `image ${src} did not resolve`).toBe(200)
+    }
+  })
+
+  test('every internal link resolves', async ({ page, request }) => {
+    await page.goto('/')
+
+    // Nav and footer links are hardcoded; body links come from CMS markdown.
+    // Both are internal paths, so any of them must resolve.
     const hrefs = await page
-      .locator("nav a[href^='/'], footer a[href^='/']")
+      .locator('a[href^="/"]')
       .evaluateAll(links => Array.from(new Set(
-        links.map(l => l.getAttribute("href")).filter((h): h is string => !!h)
-      )));
+        links.map(link => link.getAttribute('href')).filter((href): href is string => !!href)
+      )))
+
+    expect(hrefs.length, 'the page should render at least one internal link').toBeGreaterThan(0)
 
     for (const href of hrefs) {
-      const path = href.split("#")[0] || "/";
-      const response = await page.request.get(path);
-      expect(response.status(), `link ${href} did not resolve`).toBe(200);
+      const path = href.split('#')[0] || '/'
+      const response = await request.get(path)
+      expect(response.status(), `link ${href} did not resolve`).toBe(200)
     }
-  });
-});
+  })
+})
